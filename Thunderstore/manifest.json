@@ -1,0 +1,14 @@
+﻿{
+	"name": "SuperCyanTweaks",
+	"version_number": "1.0.0",
+	"website_url": "https://github.com/TheSamuel17/SuperCyanTweaks",
+	"description": "A collection of miscellaneous, self-indulgent and highly configurable changes that are either absent or too inconvenient to set up in other mods.",
+	"dependencies": [
+		"bbepis-BepInExPack-5.4.2121",
+		"RiskofThunder-HookGenPatcher-1.2.9",
+		"RiskofThunder-R2API_Core-5.3.0",
+		"RiskofThunder-R2API_Director-2.3.8",
+		"RiskofThunder-R2API_ContentManagement-1.0.10",
+		"RiskofThunder-R2API_Language-1.1.0"
+	]
+}
