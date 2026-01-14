@@ -2,16 +2,16 @@ using RoR2;
 using BepInEx;
 using R2API;
 
-
 namespace SuperCyanTweaks
 {
     // Dependencies
     [BepInDependency(DirectorAPI.PluginGUID)]
     [BepInDependency(R2API.ContentManagement.R2APIContentManager.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
+    [BepInDependency(RecalculateStatsAPI.PluginGUID)]
 
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.0")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.1")]
 
     public class Main : BaseUnityPlugin
     {
@@ -44,11 +44,16 @@ namespace SuperCyanTweaks
 
             // Changes - Items
             new EclipseLite();
+            new EmpathyCores();
             new HappiestMask();
             new SonorousWhispers();
+            new WarBonds();
             new WaxQuail();
 
-            // Changes - Equipments
+            // Changes - Equipment
+
+            new EccentricVase();
+            new Molotov6Pack();
 
             // Changes - Drones
             new EquipmentDrone();

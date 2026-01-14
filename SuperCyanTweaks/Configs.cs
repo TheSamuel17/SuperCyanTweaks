@@ -40,11 +40,23 @@ namespace SuperCyanTweaks
         // ==================== ITEMS ==================== //
         public static ConfigEntry<float> eclipseLiteBarrierBase { get; private set; }
         public static ConfigEntry<float> eclipseLiteBarrierStack { get; private set; }
+        public static ConfigEntry<bool> empathyCoresDamageTweak { get; private set; }
         public static ConfigEntry<float> happiestMaskProcChance { get; private set; }
         public static ConfigEntry<bool> sonorousWhispersRework { get; private set; }
+        public static ConfigEntry<bool> warBondsInheritable { get; private set; }
         public static ConfigEntry<bool> waxQuailMultiJump { get; private set; }
 
-        // ==================== EQUIPMENTS ==================== //
+        // ==================== EQUIPMENT ==================== //
+        public static ConfigEntry<float> eccentricVaseCooldown { get; private set; }
+        public static ConfigEntry<float> eccentricVaseMaxDist { get; private set; }
+        public static ConfigEntry<float> eccentricVaseAcceleration { get; private set; }
+        public static ConfigEntry<bool> eccentricVaseCloak { get; private set; }
+        public static ConfigEntry<bool> eccentricVaseIntangible { get; private set; }
+        public static ConfigEntry<bool> eccentricVaseNoCrater { get; private set; }
+        public static ConfigEntry<float> molotovResidueSize { get; private set; }
+        public static ConfigEntry<float> molotovResidueDuration { get; private set; }
+        public static ConfigEntry<float> molotovResidueTickrate { get; private set; }
+        public static ConfigEntry<float> molotovExplosionDamage { get; private set; }
 
         // ==================== DRONES ==================== //
         public static ConfigEntry<bool> equipDroneAlwaysFire { get; private set; }
@@ -121,16 +133,36 @@ namespace SuperCyanTweaks
             eclipseLiteBarrierBase = cfg.Bind("Items - Eclipse Lite", "Base Barrier Percentage", -1f, "Set the barrier gain per second of cooldown, in percentage. Vanilla is 1%. Set to a negative value for no change.");
             eclipseLiteBarrierStack = cfg.Bind("Items - Eclipse Lite", "Stack Barrier Percentage", .5f, "Set the barrier gain per second of cooldown, in percentage. Vanilla is 0.25%. Set to a negative value for no change.");
 
+            // Empathy Cores
+            empathyCoresDamageTweak = cfg.Bind("Items - Empathy Cores", "Empathy Cores Damage Tweak", true, "Empathy Cores damage boost affects skill damage instead of base damage.\nThis nerfs synergies that depend on base damage, notably the chainguns from Spare Drone Parts.");
+
             // Happiest Mask
             happiestMaskProcChance = cfg.Bind("Items - Happiest Mask", "Proc Chance", 10f, "Set the proc chance of this item, in percentage. Vanilla is 7%. Set to a negative value for no change.");
 
             // Sonorous Whispers
             sonorousWhispersRework = cfg.Bind("Items - Sonorous Whispers", "Sonorous Whispers Rework", true, "Items only drop from bosses proper instead of Champions, and will no longer drop from elites.\nStacking improves item rarity.\nEffect is now team-wide.");
 
-            // Wax Quail
-            waxQuailMultiJump = cfg.Bind("Items - Wax Quail", "Wax Quail Multi Jump", true, "Additional non-base jumps will grant a jump boost as well.");
+            // War Bonds
+            warBondsInheritable = cfg.Bind("Items - War Bonds", "War Bonds is Inheritable", false, "Whether this item can be inherited by turrets and such. Vanilla is true.");
 
-            // ==================== EQUIPMENTS ==================== //
+            // Wax Quail
+            waxQuailMultiJump = cfg.Bind("Items - Wax Quail", "Wax Quail Multi Jump", true, "Additional non-base jumps will grant a jump boost as well. Vanilla is false.");
+
+            // ==================== EQUIPMENT ==================== //
+
+            // Eccentric Vase
+            eccentricVaseCooldown = cfg.Bind("Equipment - Eccentric Vase", "Cooldown", 30f, "Adjust this equipment's cooldown. Vanilla is 45. Set to a negative value for no change.");
+            eccentricVaseMaxDist = cfg.Bind("Equipment - Eccentric Vase", "Max Range", 2000f, "Adjust the maximum length of the zipline. Vanilla is 1000. Set to a negative value for no change.");
+            eccentricVaseAcceleration = cfg.Bind("Equipment - Eccentric Vase", "Acceleration", 50f, "Set the acceleration value. Vanilla is 30. Set to a negative value for no change.");
+            eccentricVaseCloak = cfg.Bind("Equipment - Eccentric Vase", "Cloaked While Traveling", true, "User is cloaked while traveling. Vanilla is false.");
+            eccentricVaseIntangible = cfg.Bind("Equipment - Eccentric Vase", "Intangible While Traveling", true, "User is intangible while traveling. Vanilla is false.");
+            eccentricVaseNoCrater = cfg.Bind("Equipment - Eccentric Vase", "No Cratering", true, "User is briefly immune to fall damage on exit. Vanilla is false.");
+
+            // Motolov (6-Pack)
+            molotovResidueSize = cfg.Bind("Equipment - Molotov (6-Pack)", "Fire Residue Size", 1.75f, "Multiply the size of the lingering fire pools by this value. Vanilla is 1. Set to a negative value for no change.");
+            molotovResidueDuration = cfg.Bind("Equipment - Molotov (6-Pack)", "Fire Residue Duration", 10f, "Adjust the duration of the lingering fire pools. Vanilla is 7. Set to a negative value for no change.");
+            molotovResidueTickrate = cfg.Bind("Equipment - Molotov (6-Pack)", "Fire Residue Tickrate", 2f, "Adjust the tickrate of the lingering fire pools, in attacks per second. Vanilla is 1. Set to a negative value for no change.");
+            molotovExplosionDamage = cfg.Bind("Equipment - Molotov (6-Pack)", "Explosion Damage", -1f, "Set the damage coefficient of the fire explosions to this value. Vanilla is 2.5, despite what the description says. Set to a negative value for no change.");
 
             // ==================== DRONES ==================== //
 
