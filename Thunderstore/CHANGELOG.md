@@ -1,3 +1,13 @@
+## 1.0.2
+
+- Old War Stealthkit activation threshold increased. (25% -> 50%)
+- Wake of Vultures buff duration increased from 8s (+5s per stack) to 12s (+6s per stack).
+- Orphaned Core
+    - Ram damage coefficient increased. (400%/1000% -> 600%/1500%)
+    - Rehit delay decreased. (1.5s -> 1s)
+    - Increased hitbox size to roughly match the kinetic aura generated around Best Buddy.
+    - AI is slightly more competent.
+
 ## 1.0.1
 
 - Empathy Cores damage boost only affects skill damage instead of base damage.

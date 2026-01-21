@@ -42,7 +42,13 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> eclipseLiteBarrierStack { get; private set; }
         public static ConfigEntry<bool> empathyCoresDamageTweak { get; private set; }
         public static ConfigEntry<float> happiestMaskProcChance { get; private set; }
+        public static ConfigEntry<float> stealthKitThreshold { get; private set; }
+        public static ConfigEntry<float> bestBuddyRamDamage { get; private set; }
+        public static ConfigEntry<bool> bestBuddyBehaviorTweak { get; private set; }
+        public static ConfigEntry<bool> bestBuddyHitDetection { get; private set; }
         public static ConfigEntry<bool> sonorousWhispersRework { get; private set; }
+        public static ConfigEntry<float> wakeOfVulturesDurationBase { get; private set; }
+        public static ConfigEntry<float> wakeOfVulturesDurationStack { get; private set; }
         public static ConfigEntry<bool> warBondsInheritable { get; private set; }
         public static ConfigEntry<bool> waxQuailMultiJump { get; private set; }
 
@@ -139,8 +145,20 @@ namespace SuperCyanTweaks
             // Happiest Mask
             happiestMaskProcChance = cfg.Bind("Items - Happiest Mask", "Proc Chance", 10f, "Set the proc chance of this item, in percentage. Vanilla is 7%. Set to a negative value for no change.");
 
+            // Old War Stealthkit
+            stealthKitThreshold = cfg.Bind("Items - Old War Stealthkit", "Activation Threshold", .5f, "This item will activate under this health fraction. Vanilla is 0.25. Set to a negative value for no change.");
+
+            // Orphaned Core
+            bestBuddyRamDamage = cfg.Bind("Items - Orphaned Core", "Ram Damage", 6f, "Set the damage coefficient to this value. The value is multiplied by x2.5 against heavy targets. Vanilla is 4. Set to a negative value for no change.");
+            bestBuddyBehaviorTweak = cfg.Bind("Items - Orphaned Core", "Tweak Behavior", true, "Adjusts the AI of Best Buddy to be more competent. Vanilla is false.");
+            bestBuddyHitDetection = cfg.Bind("Items - Orphaned Core", "Improve Hit Detection", true, "Improves the re-hit rate and makes the kinetic aura hitbox roughly match the visuals. Vanilla is false.");
+
             // Sonorous Whispers
             sonorousWhispersRework = cfg.Bind("Items - Sonorous Whispers", "Sonorous Whispers Rework", true, "Items only drop from bosses proper instead of Champions, and will no longer drop from elites.\nStacking improves item rarity.\nEffect is now team-wide.");
+
+            // Wake of Vultures
+            wakeOfVulturesDurationBase = cfg.Bind("Items - Wake of Vultures", "Base Duration", 12f, "Set the aspect buff duration. Vanilla is 8. Set to a negative value for no change.");
+            wakeOfVulturesDurationStack = cfg.Bind("Items - Wake of Vultures", "Stack Duration", 6f, "Set the aspect buff duration. Vanilla is 5. Set to a negative value for no change.");
 
             // War Bonds
             warBondsInheritable = cfg.Bind("Items - War Bonds", "War Bonds is Inheritable", false, "Whether this item can be inherited by turrets and such. Vanilla is true.");

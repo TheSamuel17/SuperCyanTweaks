@@ -11,7 +11,7 @@ namespace SuperCyanTweaks
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
 
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.1")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.2")]
 
     public class Main : BaseUnityPlugin
     {
@@ -46,7 +46,10 @@ namespace SuperCyanTweaks
             new EclipseLite();
             new EmpathyCores();
             new HappiestMask();
+            new OldWarStealthkit();
+            new OrphanedCore();
             new SonorousWhispers();
+            new WakeOfVultures();
             new WarBonds();
             new WaxQuail();
 

@@ -6,7 +6,7 @@ You may turn off each change at your convenience.
 
 ## Credits
 
-* .score, Moffein & Nuxlar, for writing helpful and sometimes yoinkable code.
+* .score, Moffein, Nuxlar & Wolfo, for writing helpful and sometimes yoinkable code.
 * The denizens of `#development`, for answering my questions. Shoutouts MysticalChicken.
 
 ## Contact

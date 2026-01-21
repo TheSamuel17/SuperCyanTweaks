@@ -17,6 +17,7 @@ namespace SuperCyanTweaks
                 beetleSpawn.TryModifyFieldValue("duration", Configs.beetleSpawnDuration.Value);
             }
 
+            // Adjust headbutt damage
             if (Configs.beetleHeadbuttDmg.Value >= 0)
             {
                 beetleHeadbutt.TryModifyFieldValue("damageCoefficient", Configs.beetleHeadbuttDmg.Value);
