@@ -24,7 +24,6 @@ namespace SuperCyanTweaks
                 if (director)
                 {
                     director.maxSquadCount = (uint)Mathf.Min(Run.instance.stageClearCount + 1, 40);
-                    Log.Message(director.maxSquadCount);
                 }
             }
         }

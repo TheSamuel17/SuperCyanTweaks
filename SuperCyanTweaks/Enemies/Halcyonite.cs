@@ -94,7 +94,7 @@ namespace SuperCyanTweaks
 
                     if (CheckForHalcyonite(dccs))
                     {
-                        DirectorAPI.Stage stage = stagesWithHalcyoniteChampion[i]; Log.Message(stage);
+                        DirectorAPI.Stage stage = stagesWithHalcyoniteChampion[i];
                         int minCompletions = 4;
                         int weight = 1;
 
