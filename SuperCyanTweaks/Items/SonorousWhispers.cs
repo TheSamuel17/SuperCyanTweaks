@@ -14,6 +14,10 @@ namespace SuperCyanTweaks
     {
         public static ItemDef whispers = Addressables.LoadAssetAsync<ItemDef>("RoR2/DLC2/Items/ItemDropChanceOnKill/ItemDropChanceOnKill.asset").WaitForCompletion();
 
+        public static GameObject solusWingBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC3/SolusWing/SolusWingBody.prefab").WaitForCompletion();
+        public static GameObject solusWingWeakPointBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC3/SolusWing/ExhaustPortWeakpointBody.prefab").WaitForCompletion();
+        public static GameObject solusHeartDownedBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC3/SolusHeart/SolusHeartBody_Offering.prefab").WaitForCompletion();
+
         public static WeightedSelection<UniquePickup> selector = new WeightedSelection<UniquePickup>();
         public static float tier1Weight = 0.6f;
         public static float tier2Weight = 0.38f;
@@ -51,6 +55,7 @@ namespace SuperCyanTweaks
                 {
                     whispers.tags = whispers.tags.AddToArray(ItemTag.CannotCopy); // No longer inheritable
                     GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
+                    
                     UpdateDescription();
                 }
             }
@@ -106,9 +111,24 @@ namespace SuperCyanTweaks
                 }
 
                 // Main logic
-                if (num > 0 && victimBody.isBoss)
+                if (num > 0 && (victimBody.isBoss || victimBody.bodyIndex == BodyCatalog.FindBodyIndex(solusHeartDownedBodyPrefab)))
                 {
-                    PickupDropletController.CreatePickupDroplet(GenerateDrop(num), vector + Vector3.up * 1.5f, Vector3.up * 20f + ray.direction * 2f, false, false);
+                    Vector3 finalVelocity;
+
+                    if (victimBody.bodyIndex == BodyCatalog.FindBodyIndex(solusWingBodyPrefab))
+                    {
+                        finalVelocity = Vector3.up * 40f + ray.direction * 20f; // Launch the item extra far so it doesn't get buried under Solus Wing's corpse.
+                    }
+                    else if (victimBody.bodyIndex == BodyCatalog.FindBodyIndex(solusWingWeakPointBodyPrefab))
+                    {
+                        finalVelocity = Vector3.up * 20f + ray.direction * 10f;
+                    }
+                    else
+                    {
+                        finalVelocity = Vector3.up * 20f + ray.direction * 2f;
+                    }
+
+                    PickupDropletController.CreatePickupDroplet(GenerateDrop(num), vector + Vector3.up * 1.5f, finalVelocity, false, false);
                 }
             }
 
@@ -152,7 +172,7 @@ namespace SuperCyanTweaks
             );
             
             LanguageAPI.Add("ITEM_ITEMDROPCHANCEONKILL_DESC",
-                $"Bosses drop an item ({tier1String}%/<style=cIsHealing>{tier2String}%</style>/<color=#FF7F7F>{tier3String}%</color>) on kill. " +
+                $"Bosses drop an item ({tier1String}%/<style=cIsHealing>{tier2String}%</style>/<style=cIsHealth>{tier3String}%</style>) on kill. " +
                 $"<style=cStack>(Increases rarity chances of the items per stack).</style>",
                 "en"
             );
@@ -165,7 +185,7 @@ namespace SuperCyanTweaks
             );
 
             LanguageAPI.Add("ITEM_ITEMDROPCHANCEONKILL_DESC",
-                $"Les boss vaincus font apparaître un objet ({tier1Weight * 100} %/<style=cIsHealing>{tier2Weight * 100} %</style>/<color=#FF7F7F>{tier3Weight * 100} %</color>). " +
+                $"Les boss vaincus font apparaître un objet ({tier1Weight * 100} %/<style=cIsHealing>{tier2Weight * 100} %</style>/<style=cIsHealth>{tier3Weight * 100} %</style>). " +
                 $"<style=cStack>(La rareté de l'objet augmente à chaque cumul).</style>",
                 "fr"
             );

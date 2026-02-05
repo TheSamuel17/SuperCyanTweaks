@@ -1,3 +1,29 @@
+## 1.0.3
+
+- Drone Scrapper
+    - Max count of 1 per stage.
+    - Can now spawn on Treeborn Colony & Golden Dieback.
+- Foreign Fruit cooldown decreased. (45s -> 30s)
+- Eclipse 4 & 7 modifiers now apply to every non-player team; this notably includes the Void team.
+- Default config: Grandparent gravity orb pull force increased (-3000 -> -4000) so targets fall out of it less at higher velocities.
+- Taking the fans on Rallypoint Delta grants a temporary speed boost.
+- Cauldrons on Commencement will never contain items tagged with OnStageBeginEffect.
+- Further refined Best Buddy's behavior. Still a little clingy, but we love them for that.
+- Sonorous Whispers rework
+    - Allowed an exception case for downed Solus Heart; it'll now drop an item when defeated, just like the other final bosses.
+    - Solus Wing will eject the items far enough to not end up completely buried.
+- Halcyon Seed
+    - Ally Aurelionite now grabs the attention of every enemy within 60m upon spawning, as well as any subsequently struck target. Taunt effect lasts for 15s.
+    - Removed ally Aurelionite's minimum distance requirement to use the laser. (10m -> 0m)
+- Halcyonite
+    - Spawns on Prime Meridian pre-loop.
+    - Is now categorized as a Miniboss on every vanilla stage, instead of being categorized as a Champion most of the time. For some reason.
+    - When looping, they will also spawn during False Son Phase 2 alongside Stone Golems.
+- False Son Phase 2: enemy count scales with stage count, effectively amounting to 4 (+5 per loop).
+- Clay Apothecary
+    - Now uses the slam/mortar attack at range regardless of health.
+    - Slam/mortar attack no longer inflicts self-damage.
+
 ## 1.0.2
 
 - Old War Stealthkit activation threshold increased. (25% -> 50%)

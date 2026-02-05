@@ -1,6 +1,6 @@
 # SuperCyanTweaks
 
-My simpler tweaks will go inside this mod instead of polluting Thunderstore with a bunch of smaller mods. Refer to the `Wiki` tab for more information.
+My simpler tweaks will go inside this mod instead of polluting Thunderstore with a bunch of smaller mods. Refer to the **[Wiki](https://thunderstore.io/package/Samuel17/SuperCyanTweaks/wiki/)** tab for more information.
 
 You may turn off each change at your convenience.
 

@@ -10,8 +10,11 @@ namespace SuperCyanTweaks
     [BepInDependency(LanguageAPI.PluginGUID)]
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
 
+    // Soft dependencies
+    [BepInDependency("Jeffdev.FalseSonBossTweaks", BepInDependency.DependencyFlags.SoftDependency)] // Phase 2 enemy tweaks of this mod can't be conventionally turned off, so I have to forcibly acquire priority
+
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.2")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.3")]
 
     public class Main : BaseUnityPlugin
     {
@@ -30,9 +33,11 @@ namespace SuperCyanTweaks
             new Beetle();
             new BighornBison();
             new ClayApothecary();
+            new FalseSon();
             new Geep();
             new Grandparent();
             new Gup();
+            new Halcyonite();
             new Imp();
             new Lemurian();
             new MiniMushrum();
@@ -45,6 +50,7 @@ namespace SuperCyanTweaks
             // Changes - Items
             new EclipseLite();
             new EmpathyCores();
+            new HalcyonSeed();
             new HappiestMask();
             new OldWarStealthkit();
             new OrphanedCore();
@@ -54,13 +60,23 @@ namespace SuperCyanTweaks
             new WaxQuail();
 
             // Changes - Equipment
-
             new EccentricVase();
+            new ForeignFruit();
             new Molotov6Pack();
 
             // Changes - Drones
             new EquipmentDrone();
             new GunnerTurret();
+
+            // Changes - Interactables
+            new DroneScrapper();
+
+            // Changes - Stages
+            new Commencement();
+            new RallypointDelta();
+
+            // Changes - Miscellaneous
+            new Eclipse();
         }
     }
 }

@@ -13,6 +13,9 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> bighornBisonChargeCoeff { get; private set; }
         public static ConfigEntry<int> clayApothecaryCost { get; private set; }
         public static ConfigEntry<float> clayApothecaryTarBallRange { get; private set; }
+        public static ConfigEntry<float> clayApothecaryMortarHealthThreshold { get; private set; }
+        public static ConfigEntry<float> clayApothecarySlamSelfDmg { get; private set; }
+        public static ConfigEntry<bool> falseSonGolemCountTweak { get; private set; }
         public static ConfigEntry<int> geepCost { get; private set; }
         public static ConfigEntry<int> grandparentCost { get; private set; }
         public static ConfigEntry<float> grandparentRockActivationRange { get; private set; }
@@ -20,6 +23,9 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> grandparentGravOrbDynamicSpeed { get; private set; }
         public static ConfigEntry<bool> grandparentReduceDowntime { get; private set; }
         public static ConfigEntry<bool> gupDelayAttackOnSpawn { get; private set; }
+        public static ConfigEntry<bool> halcyoniteOnMeridianPreLoop { get; private set; }
+        public static ConfigEntry<bool> halcyoniteOnFalseSonLoop { get; private set; }
+        public static ConfigEntry<bool> halcyoniteProperCategory { get; private set; }
         public static ConfigEntry<bool> impOnHelminthRoost { get; private set; }
         public static ConfigEntry<float> lemurianFireballRange { get; private set; }
         public static ConfigEntry<float> mushrumSprintDist { get; private set; }
@@ -41,6 +47,11 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> eclipseLiteBarrierBase { get; private set; }
         public static ConfigEntry<float> eclipseLiteBarrierStack { get; private set; }
         public static ConfigEntry<bool> empathyCoresDamageTweak { get; private set; }
+        public static ConfigEntry<bool> allyAurelioniteTaunt { get; private set; }
+        public static ConfigEntry<float> allyAurelioniteTauntRange { get; private set; }
+        public static ConfigEntry<float> allyAurelioniteTauntDuration { get; private set; }
+        public static ConfigEntry<float> allyAurelioniteMinLaserRange { get; private set; }
+
         public static ConfigEntry<float> happiestMaskProcChance { get; private set; }
         public static ConfigEntry<float> stealthKitThreshold { get; private set; }
         public static ConfigEntry<float> bestBuddyRamDamage { get; private set; }
@@ -59,6 +70,7 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> eccentricVaseCloak { get; private set; }
         public static ConfigEntry<bool> eccentricVaseIntangible { get; private set; }
         public static ConfigEntry<bool> eccentricVaseNoCrater { get; private set; }
+        public static ConfigEntry<float> foreignFruitCooldown { get; private set; }
         public static ConfigEntry<float> molotovResidueSize { get; private set; }
         public static ConfigEntry<float> molotovResidueDuration { get; private set; }
         public static ConfigEntry<float> molotovResidueTickrate { get; private set; }
@@ -67,6 +79,19 @@ namespace SuperCyanTweaks
         // ==================== DRONES ==================== //
         public static ConfigEntry<bool> equipDroneAlwaysFire { get; private set; }
         public static ConfigEntry<float> gunnerTurretRange { get; private set; }
+
+        // ==================== INTERACTABLES ==================== //
+        public static ConfigEntry<int> droneScrapperMaxCount { get; private set; }
+        public static ConfigEntry<bool> droneScrapperOnHabitat { get; private set; }
+
+        // ==================== STAGES ==================== //
+        public static ConfigEntry<bool> moonCauldronTweak { get; private set; }
+        public static ConfigEntry<bool> fanSpeedBoost { get; private set; }
+        public static ConfigEntry<float> fanBuffDuration { get; private set; }
+        public static ConfigEntry<float> fanBuffStrength { get; private set; }
+
+        // ==================== MISCELLANEOUS ==================== //
+        public static ConfigEntry<bool> eclipseTeamTweak { get; private set; }
 
         public static void Init(ConfigFile cfg)
         {
@@ -87,6 +112,11 @@ namespace SuperCyanTweaks
             // Clay Apothecary
             clayApothecaryCost = cfg.Bind("Enemies - Clay Apothecary", "Spawn Cost", 125, "Set the director credit cost. Vanilla is 150. Set to a negative value for no change.");
             clayApothecaryTarBallRange = cfg.Bind("Enemies - Clay Apothecary", "Max Tar Ball Range", 75f, "Clay Apothecaries will attack from this far away with tar balls. Vanilla is 65. Set to a negative value for no change.");
+            clayApothecaryMortarHealthThreshold = cfg.Bind("Enemies - Clay Apothecary", "Ranged Mortar Health Threshold", 1f, "Clay Apothecaries will use their slam/mortar attack at range under this health fraction. Vanilla is 0.5. Set to a negative value for no change.");
+            clayApothecarySlamSelfDmg = cfg.Bind("Enemies - Clay Apothecary", "Slam Self-Damage", 0f, "Clay Apothecaries will lose this percentage of their current health when using the slam/mortar attack. Vanilla is 5. Set to a negative value for no change.");
+
+            // False Son
+            falseSonGolemCountTweak = cfg.Bind("Enemies - False Son", "Golem Count Scales With Stage Count", true, "The maximum number of enemies that can spawn during Phase 2 is directly proportional to the current stage count.\nThus, it will be reduced from 5 to 4 if fought without looping.");
 
             // Geep
             geepCost = cfg.Bind("Enemies - Geep", "Spawn Cost", 50, "Set the director credit cost. Vanilla is 35. Set to a negative value for no change.");
@@ -94,12 +124,17 @@ namespace SuperCyanTweaks
             // Grandparent
             grandparentCost = cfg.Bind("Enemies - Grandparent", "Spawn Cost", 1000, "Set the director credit cost. Vanilla is 1150. Set to a negative value for no change.");
             grandparentRockActivationRange = cfg.Bind("Enemies - Grandparent", "Rock Throw Activation Range", 1500f, "Activation range of Rock Throw. Vanilla is 300. Set to a negative value for no change.");
-            grandparentGravOrbForce = cfg.Bind("Enemies - Grandparent", "Gravity Orb Force", -3000f, "The force of the gravity orb's pull. Set to vanilla value (-1000) for no change.");
+            grandparentGravOrbForce = cfg.Bind("Enemies - Grandparent", "Gravity Orb Force", -4000f, "The force of the gravity orb's pull. Set to vanilla value (-1000) for no change.");
             grandparentGravOrbDynamicSpeed = cfg.Bind("Enemies - Grandparent", "Dynamic Orb Speed", true, "Gravity Orb projectile speed scales with target distance. Vanilla is false.");
             grandparentReduceDowntime = cfg.Bind("Enemies - Grandparent", "Reduce Downtime", true, "Grandparents will spend less time in the 'rotate to target' behaviors. Vanilla is false.");
 
             // Gup
             gupDelayAttackOnSpawn = cfg.Bind("Enemies - Gup", "Delay Attack After Spawning", true, "Adds a small delay between spawning and throwing out their first attack.");
+
+            // Halcyonite
+            halcyoniteOnMeridianPreLoop = cfg.Bind("Enemies - Halcyonite", "Spawn on Prime Meridian (Pre-Loop)", true, "Halcyonites appear on Prime Meridian pre-loop, as they do in other Path of the Colossus stages.");
+            halcyoniteOnFalseSonLoop = cfg.Bind("Enemies - Halcyonite", "Spawn During False Son (Loop)", true, "Halcyonites appear during False Son Phase 2 when looping.");
+            halcyoniteProperCategory = cfg.Bind("Enemies - Halcyonite", "Monster Category Fix", true, "Properly categorizes Halcyonite as a Miniboss monster on every stage where it is considered a Champion.\nWhich is pretty much everywhere except Gilded Coast & Prime Meridian.");
 
             // Imp
             impOnHelminthRoost = cfg.Bind("Enemies - Imp", "Spawn on Helminth Hatchery", true, "Imps appear on Helminth Hatchery.");
@@ -142,6 +177,12 @@ namespace SuperCyanTweaks
             // Empathy Cores
             empathyCoresDamageTweak = cfg.Bind("Items - Empathy Cores", "Empathy Cores Damage Tweak", true, "Empathy Cores damage boost affects skill damage instead of base damage.\nThis nerfs synergies that depend on base damage, notably the chainguns from Spare Drone Parts.");
 
+            // Halcyon Seed
+            allyAurelioniteTaunt = cfg.Bind("Items - Halcyon Seed", "Aurelionite Taunt", true, "Aurelionite will get the attention of nearby enemies upon spawning, as well as any enemy that gets hit.");
+            allyAurelioniteTauntRange = cfg.Bind("Items - Halcyon Seed", "Taunt Range", 60f, "Set the radius of the taunt effect.");
+            allyAurelioniteTauntDuration = cfg.Bind("Items - Halcyon Seed", "Taunt Duration", 15f, "Set how long the enemy will be distracted for.\nIt'll take the highest value between this and the enemy's natural attention span.");
+            allyAurelioniteMinLaserRange = cfg.Bind("Items - Halcyon Seed", "Minimum Laser Range", 0f, "The minimum distance Aurelionite is allowed to use the laser. Vanilla is 10. Set to a negative value for no change.");
+
             // Happiest Mask
             happiestMaskProcChance = cfg.Bind("Items - Happiest Mask", "Proc Chance", 10f, "Set the proc chance of this item, in percentage. Vanilla is 7%. Set to a negative value for no change.");
 
@@ -176,6 +217,9 @@ namespace SuperCyanTweaks
             eccentricVaseIntangible = cfg.Bind("Equipment - Eccentric Vase", "Intangible While Traveling", true, "User is intangible while traveling. Vanilla is false.");
             eccentricVaseNoCrater = cfg.Bind("Equipment - Eccentric Vase", "No Cratering", true, "User is briefly immune to fall damage on exit. Vanilla is false.");
 
+            // Foreign Fruit
+            foreignFruitCooldown = cfg.Bind("Equipment - Foreign Fruit", "Cooldown", 30f, "Adjust this equipment's cooldown. Vanilla is 45. Set to a negative value for no change.");
+
             // Motolov (6-Pack)
             molotovResidueSize = cfg.Bind("Equipment - Molotov (6-Pack)", "Fire Residue Size", 1.75f, "Multiply the size of the lingering fire pools by this value. Vanilla is 1. Set to a negative value for no change.");
             molotovResidueDuration = cfg.Bind("Equipment - Molotov (6-Pack)", "Fire Residue Duration", 10f, "Adjust the duration of the lingering fire pools. Vanilla is 7. Set to a negative value for no change.");
@@ -189,6 +233,27 @@ namespace SuperCyanTweaks
 
             // Gunner Turret
             gunnerTurretRange = cfg.Bind("Drones - Gunner Turret", "Attack Range", 75f, "Gunner Turrets will attack from this far away. Vanilla is 60. Set to a negative value for no change.");
+
+            // ==================== INTERACTABLES ==================== //
+
+            // Drone Scrapper
+            droneScrapperMaxCount = cfg.Bind("Interactables - Drone Scrapper", "Max Count", 1, "Set the maximum amount of times it can spawn per stage. Vanilla is -1. Set to negative for no limit.");
+            droneScrapperOnHabitat = cfg.Bind("Interactables - Drone Scrapper", "Spawn on Treeborn Colony", true, "Drone Scrappers appear on Treeborn Colony & Golden Dieback.");
+
+            // ==================== STAGES ==================== //
+
+            // Commencement
+            moonCauldronTweak = cfg.Bind("Stages - Commencement", "Cauldron Tweak", true, "Blacklist items tagged with 'OnStageBeginEffet', which includes things like Rusted Key/Sale Star.");
+
+            // Rallypoint Delta
+            fanSpeedBoost = cfg.Bind("Stages - Rallypoint Delta", "Enable Fan Speed Boost", true, "Taking the fans temporarily increases movement speed for players.");
+            fanBuffDuration = cfg.Bind("Stages - Rallypoint Delta", "Fan Buff Duration", 10f, "Set the duration of the speed boost, in seconds.");
+            fanBuffStrength = cfg.Bind("Stages - Rallypoint Delta", "Fan Buff Strength", 50f, "Additively increase movement speed by this percentage while under the effects of the buff.");
+
+            // ==================== MISC ==================== //
+
+            // Eclipse
+            eclipseTeamTweak = cfg.Bind("Miscellaneous - Eclipse", "E4/E7 Team Tweak", true, "Apply the vanilla Eclipse 4 & 7 modifiers to other non-ally teams, such as Void. Vanilla is false.");
         }
     }
 }

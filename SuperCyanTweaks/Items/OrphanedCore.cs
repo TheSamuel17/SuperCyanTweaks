@@ -50,17 +50,34 @@ namespace SuperCyanTweaks
             if (Configs.bestBuddyBehaviorTweak.Value == true)
             {
                 // Ram properties
-                if (bestBuddyRam.TryGetFieldValueString("initialHopVelocity", out float hopVelocity) && hopVelocity < 1.2f) 
+                if (bestBuddyRam.TryGetFieldValueString("initialHopVelocity", out float hopVelocity) && hopVelocity < 1.2f)
+                {
                     bestBuddyRam.TryModifyFieldValue("initialHopVelocity", 1.2f); // Vanilla is 1
+                }
 
                 if (bestBuddyRam.TryGetFieldValueString("lockonDistance", out float lockonDistance) && lockonDistance < 40f)
+                {
                     bestBuddyRam.TryModifyFieldValue("lockonDistance", 50f); // Vanilla is 30
+                }
 
                 if (bestBuddyRam.TryGetFieldValueString("lockonAngle", out float lockonAngle) && lockonAngle < 360f)
+                {
                     bestBuddyRam.TryModifyFieldValue("lockonAngle", 360f); // Vanilla is 180
+                }
 
                 if (bestBuddyRam.TryGetFieldValueString("recoilAmplitude", out float recoilAmplitude) && recoilAmplitude < 2f)
+                {
                     bestBuddyRam.TryModifyFieldValue("recoilAmplitude", 2f); // Vanilla is 1
+                }
+
+                // AI parameters
+                BaseAI ai = friendUnitMasterPrefab.GetComponent<BaseAI>();
+                if (ai)
+                {
+                    ai.fullVision = true;
+                    ai.xrayVision = true;
+                    ai.copyLeaderTarget = true;
+                }
 
                 // Skill drivers
                 AISkillDriver[] skillDrivers = friendUnitMasterPrefab.GetComponents<AISkillDriver>();
@@ -70,21 +87,42 @@ namespace SuperCyanTweaks
                     {
                         case "KineticAura":
                             if (skillDriver.maxDistance < 50f)
-                                skillDriver.maxDistance = 50f; // Increase targeting range; vanilla is 30
+                            {
+                                skillDriver.maxDistance = 50f; // Increase targeting range; vanilla is 30.
+                            }
 
                             skillDriver.requireSkillReady = true; // This skill driver can be chosen while on cooldown, for some reason. This is what makes them very clingy towards enemies.
                             skillDriver.shouldSprint = true;
 
-                            skillDriver.resetCurrentEnemyOnNextDriverSelection = true; // Retarget after behavior is complete
+                            skillDriver.resetCurrentEnemyOnNextDriverSelection = true; // Retarget after behavior is complete.
+
+                            skillDriver.activationRequiresTargetLoS = true; // LoS check is helpful methinks.
+                            skillDriver.selectionRequiresTargetLoS = true;
 
                             return;
 
                         case "StrafeAroundEnemy":
                             if (skillDriver.minDistance > 0f)
+                            {
                                 skillDriver.minDistance = 0f; // Only strafes in a narrow 10-15m range, also contributing to their clingy behavior towards enemies.
+                            }
 
                             if (skillDriver.maxDistance < 20f)
+                            {
                                 skillDriver.maxDistance = 20f;
+                            }
+
+                            return;
+
+                        case "NavigateToEnemy":
+                            
+                            if (skillDriver.maxDistance < 60f)
+                            {
+                                skillDriver.maxDistance = 60f; // Increase pathing range; vanilla is 50.
+                            }
+                            
+                            skillDriver.selectionRequiresAimTarget = false; // Why are these set to true?
+                            skillDriver.selectionRequiresTargetLoS = false;
 
                             return;
                     }

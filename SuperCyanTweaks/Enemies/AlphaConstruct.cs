@@ -17,6 +17,9 @@ namespace SuperCyanTweaks
         public static GameObject minorConstructBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MinorConstructBody.prefab").WaitForCompletion();
         public static GameObject minorConstructMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MinorConstructMaster.prefab").WaitForCompletion();
 
+        public static GameObject minorConstructAllyBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MinorConstructOnKillBody.prefab").WaitForCompletion();
+        public static GameObject minorConstructAllyMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MinorConstructOnKillMaster.prefab").WaitForCompletion();
+
         public AlphaConstruct()
         {
             // Implement teleporting skill
@@ -27,6 +30,7 @@ namespace SuperCyanTweaks
                 if (ai)
                 {
                     ai.enemySearch.maxDistanceFilter = float.PositiveInfinity;
+                    ai.xrayVision = true;
                 }
 
                 // Necessary component
