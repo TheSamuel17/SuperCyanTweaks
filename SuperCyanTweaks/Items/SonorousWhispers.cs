@@ -121,7 +121,7 @@ namespace SuperCyanTweaks
                     }
                     else if (victimBody.bodyIndex == BodyCatalog.FindBodyIndex(solusWingWeakPointBodyPrefab))
                     {
-                        finalVelocity = Vector3.up * 20f + ray.direction * 10f;
+                        finalVelocity = Vector3.up * 30f + ray.direction * 15f;
                     }
                     else
                     {

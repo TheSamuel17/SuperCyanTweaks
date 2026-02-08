@@ -57,8 +57,8 @@ namespace SuperCyanTweaks
             {
                 var buffZone = purchasedObject.AddComponent<BuffWard>();
                 buffZone.shape = BuffWard.BuffWardShape.VerticalTube;
-                buffZone.radius = 2.95f;
-                buffZone.TubeHeight = 5f;
+                buffZone.radius = 3.1f;
+                buffZone.TubeHeight = 5.1f;
                 buffZone.interval = .1f;
                 buffZone.expires = false;
 

@@ -10,6 +10,7 @@ namespace SuperCyanTweaks
     {
         public static GameObject scuMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/RoboBallBossMaster.prefab").WaitForCompletion();
         public static GameObject awuMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/SuperRoboBallBossMaster.prefab").WaitForCompletion();
+        public static CharacterSpawnCard cscScu = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/RoboBallBoss/cscRoboBallBoss.asset").WaitForCompletion();
 
         public SolusControlUnit()
         {
@@ -26,6 +27,24 @@ namespace SuperCyanTweaks
                 {
                     AdjustSkillDrivers(skillDriver);
                 }
+            }
+
+            if (Configs.scuOnSolusWingLoop.Value == true)
+            {
+                DirectorAPI.DirectorCardHolder scuSpawnCard = new()
+                {
+                    Card = new()
+                    {
+                        minimumStageCompletions = 5,
+                        preventOverhead = false,
+                        selectionWeight = 20,
+                        spawnDistance = DirectorCore.MonsterSpawnDistance.Standard,
+                        spawnCard = cscScu,
+                    },
+                    MonsterCategory = DirectorAPI.MonsterCategory.Champions,
+                    MonsterCategorySelectionWeight = 33,
+                };
+                DirectorAPI.Helpers.AddNewMonsterToStage(scuSpawnCard, false, DirectorAPI.Stage.SolutionalHaunt);
             }
         }
 

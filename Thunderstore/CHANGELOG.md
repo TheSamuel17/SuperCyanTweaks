@@ -1,3 +1,11 @@
+## 1.0.4
+
+- Added "Disable New Configs" config. If enabled, any newly-generated config will be disabled. Turn that on if you don't care about The Director's Vision, or don't want to deal with new updates introducing unwanted changes.
+- Grandparent
+    - Rock velocity now also dynamically scales with distance.
+    - Made the target-searching logic for the rock throw attack functional. As a result, Grandparents will be able to more reliably chuck boulders at airborne targets, reducing the likelihood of falling back to throwing it absolutely nowhere near its current target.
+- When looping, Solus Control Units will be able to spawn during the Solus Wing fight.
+
 ## 1.0.3
 
 - Drone Scrapper
