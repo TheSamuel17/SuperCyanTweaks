@@ -37,7 +37,7 @@ namespace SuperCyanTweaks
                 RecalculateStatsAPI.GetStatCoefficients += GetStatCoefficients;
 
                 // Set up fan behavior
-                PurchaseInteraction.onPurchaseGlobalServer += PurchaseInteraction_onPurchaseGlobalServer;
+                Stage.onStageStartGlobal += OnStageStartGlobal;
             }
         }
 
@@ -49,31 +49,55 @@ namespace SuperCyanTweaks
             }
         }
 
-        private void PurchaseInteraction_onPurchaseGlobalServer(CostTypeDef.PayCostContext payCostContext, CostTypeDef.PayCostResults payCostResults)
+        private void OnStageStartGlobal(Stage stage)
         {
-            GameObject purchasedObject = payCostContext.purchasedObject;
-            PurchaseInteraction purchaseInteraction = purchasedObject.GetComponent<PurchaseInteraction>();
-            if (purchaseInteraction && purchaseInteraction.displayNameToken == "FAN_NAME")
+            if (SceneInfo.instance.sceneDef != SceneCatalog.FindSceneDef("frozenwall"))
             {
-                var buffZone = purchasedObject.AddComponent<BuffWard>();
-                buffZone.shape = BuffWard.BuffWardShape.VerticalTube;
-                buffZone.radius = 3.1f;
-                buffZone.TubeHeight = 5.1f;
-                buffZone.interval = .1f;
-                buffZone.expires = false;
+                return;
+            }
 
-                buffZone.buffDef = fanSpeedBuffDef;
-                buffZone.buffDuration = Configs.fanBuffDuration.Value;
-                buffZone.useTeamMemberFeetPosition = true;
-                buffZone.invertTeamFilter = false;
+            GameObject fanHolder = GameObject.Find("/PERMUTATION: Human Fan/");
+            if (fanHolder)
+            {
+                foreach (Transform child in fanHolder.transform)
+                {
+                    AdjustFan(child.gameObject);
+                }
+            }
+        }
 
-                buffZone.gameObject.transform.position = purchasedObject.transform.position;
-                buffZone.floorWard = true;
+        private void AdjustFan(GameObject fan)
+        {
+            Transform model = fan.transform.Find("mdlHumanFan");
+            if (model is not null)
+            {
+                Transform jumpVolume = model.transform.Find("JumpVolume");
+                if (jumpVolume is not null)
+                {
+                    jumpVolume.gameObject.AddComponent<OnUseFan>();
+                }
+            }
+        }
+    }
 
-                buffZone.Networkradius = buffZone.radius;
-
-                TeamFilter teamFilter = buffZone.gameObject.GetComponent<TeamFilter>();
-                teamFilter.teamIndex = TeamIndex.Player;
+    public class OnUseFan : MonoBehaviour
+    {
+        public JumpVolume jumpVolume;
+        
+        public void Awake()
+        {
+            jumpVolume = gameObject.GetComponent<JumpVolume>();
+            if (jumpVolume)
+            {
+                jumpVolume.onJump.AddListener(OnJump);
+            }
+        }
+        
+        public void OnJump(CharacterBody body)
+        {
+            if (body && body.teamComponent && body.teamComponent.teamIndex == TeamIndex.Player)
+            {
+                body.AddTimedBuff(RallypointDelta.fanSpeedBuffDef, Configs.fanBuffDuration.Value);
             }
         }
     }

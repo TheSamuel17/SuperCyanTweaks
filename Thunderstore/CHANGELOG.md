@@ -1,3 +1,17 @@
+## 1.0.5
+
+- Removed any and all jank from the Rallypoint Delta fan buff logic. In completely unrelated news, I now know what a `JumpVolume` is.
+- Drifter
+    - Junk Cube search angle increased. (8 degrees -> 15)
+    - Junk Cube search distance increased. (40m -> 50m)
+    - Cleanup no longer resets cooldown on use.
+- Growth Nectar: max buff count per stack increased. (4 -> 5)
+- Eclipse Lite: now calculates barrier gain using max health + shields instead of just max health.
+- Genesis Loop
+    - Proc coefficient increased. (1.0 -> 3.0)
+    - Skips the line of sight check if used by a Player team member.
+- Made some IL hooks more robust.
+
 ## 1.0.4
 
 - Added "Disable New Configs" config. If enabled, any newly-generated config will be disabled. Turn that on if you don't care about The Director's Vision, or don't want to deal with new updates introducing unwanted changes.

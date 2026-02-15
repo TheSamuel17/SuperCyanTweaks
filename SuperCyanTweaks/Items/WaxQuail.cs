@@ -1,4 +1,5 @@
 ﻿using MonoMod.Cil;
+using RoR2;
 
 namespace SuperCyanTweaks
 {
@@ -15,19 +16,14 @@ namespace SuperCyanTweaks
                     bool hookFailed = true;
 
                     if (
-                        c.TryGotoNext(MoveType.After,
-                        x => x.MatchLdcR4(1.5f)
-                    ))
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchCallvirt("RoR2.CharacterBody", "get_isSprinting")) &&
+                        c.TryGotoPrev(MoveType.Before,
+                        x => x.MatchBr(out _))
+                    )
                     {
-                        if (
-                            c.TryGotoNext(MoveType.After,
-                            x => x.MatchLdcR4(1.5f)
-                        ))
-                        {
-                            c.Index += 1;
-                            c.Remove();
-                            hookFailed = false;
-                        }
+                        c.Remove();
+                        hookFailed = false;
                     }
 
                     if (hookFailed == true)

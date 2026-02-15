@@ -18,17 +18,13 @@ namespace SuperCyanTweaks
 
                     if (
                         c.TryGotoNext(MoveType.After,
-                        x => x.MatchLdsfld(typeof(RoR2Content.Items), nameof(RoR2Content.Items.GhostOnKill))
-                    ))
+                        x => x.MatchLdsfld(typeof(RoR2Content.Items), nameof(RoR2Content.Items.GhostOnKill))) &&
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchLdcR4(7f))
+                    )
                     {
-                        if (
-                            c.TryGotoNext(MoveType.Before,
-                            x => x.MatchLdcR4(7f)
-                        ))
-                        {
-                            c.Next.Operand = Configs.happiestMaskProcChance.Value;
-                            hookFailed = false;
-                        }
+                        c.Next.Operand = Configs.happiestMaskProcChance.Value;
+                        hookFailed = false;
                     }
 
                     if (hookFailed == true)

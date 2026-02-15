@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using R2API;
 using MonoMod.Cil;
+using System;
 
 namespace SuperCyanTweaks
 {
@@ -12,9 +13,15 @@ namespace SuperCyanTweaks
             float basePercentage = 1f;
             float stackPercentage = .25f;
 
-            // Configurable barrier gain (first stack)
-            if (Configs.eclipseLiteBarrierBase.Value >= 0)
+            // Configurable barrier gain
+            if (Configs.eclipseLiteBarrierBase.Value >= 0 || Configs.eclipseLiteBarrierStack.Value >= 0)
             {
+                if (Configs.eclipseLiteBarrierBase.Value >= 0)
+                    basePercentage = Configs.eclipseLiteBarrierBase.Value;
+
+                if (Configs.eclipseLiteBarrierStack.Value >= 0)
+                    stackPercentage = Configs.eclipseLiteBarrierStack.Value;
+
                 bool hookFailed = true;
                 IL.RoR2.CharacterBody.OnSkillCooldown += (il) =>
                 {
@@ -22,56 +29,66 @@ namespace SuperCyanTweaks
 
                     if (
                         c.TryGotoNext(MoveType.After,
-                        x => x.MatchLdsfld(typeof(DLC3Content.Items), nameof(DLC3Content.Items.BarrierOnCooldown))
-                    ))
+                        x => x.MatchLdsfld(typeof(DLC3Content.Items), nameof(DLC3Content.Items.BarrierOnCooldown))) &&
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchLdcR4(0.01f))
+                    )
                     {
-                        if (
-                            c.TryGotoNext(MoveType.Before,
-                            x => x.MatchLdcR4(0.01f)
-                        ))
+                        if (Configs.eclipseLiteBarrierBase.Value >= 0)
                         {
                             c.Next.Operand = Configs.eclipseLiteBarrierBase.Value / 100;
-                            hookFailed = false;
-                            updated = true;
-                            basePercentage = Configs.eclipseLiteBarrierBase.Value;
                         }
+
+                        c.Index++;
+
+                        if (Configs.eclipseLiteBarrierStack.Value >= 0)
+                        {
+                            c.Next.Operand = Configs.eclipseLiteBarrierStack.Value / 100;
+                        }
+
+                        hookFailed = false;
+                        updated = true;
                     }
 
                     if (hookFailed == true)
                     {
-                        Log.Error("Eclipse Lite (first stack) hook failed!");
+                        Log.Error("Eclipse Lite barrier gain hook failed!");
                     }
                 };
             }
 
-            // Configurable barrier gain (subsequent stacks)
-            if (Configs.eclipseLiteBarrierStack.Value >= 0)
+            // Count shields for barrier gain
+            if (Configs.eclipseLiteCountShields.Value == true)
             {
-                bool hookFailed = true;
+                bool hook2Failed = true;
                 IL.RoR2.CharacterBody.OnSkillCooldown += (il) =>
                 {
                     ILCursor c = new(il);
 
                     if (
-                        c.TryGotoNext(MoveType.After,
-                        x => x.MatchLdsfld(typeof(DLC3Content.Items), nameof(DLC3Content.Items.BarrierOnCooldown))
-                    ))
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchCallOrCallvirt<CharacterBody>("get_maxHealth"))
+                    )
                     {
-                        if (
-                            c.TryGotoNext(MoveType.Before,
-                            x => x.MatchLdcR4(0.0025f)
-                        ))
+                        c.Remove();
+                        c.EmitDelegate<Func<CharacterBody, float>>((body) =>
                         {
-                            c.Next.Operand = Configs.eclipseLiteBarrierStack.Value / 100;
-                            hookFailed = false;
-                            updated = true;
-                            stackPercentage = Configs.eclipseLiteBarrierStack.Value;
-                        }
+                            if (body.healthComponent)
+                            {
+                                return body.healthComponent.fullCombinedHealth;
+                            }
+                            else
+                            {
+                                return body.maxHealth;
+                            }
+                        });
+
+                        hook2Failed = false;
                     }
 
-                    if (hookFailed == true)
+                    if (hook2Failed == true)
                     {
-                        Log.Error("Eclipse Lite (subsequent stacks) hook failed!");
+                        Log.Error("Eclipse Lite shield hook failed!");
                     }
                 };
             }

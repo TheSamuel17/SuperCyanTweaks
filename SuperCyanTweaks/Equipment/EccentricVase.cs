@@ -32,8 +32,10 @@ namespace SuperCyanTweaks
 
                     if (
                         c.TryGotoNext(MoveType.Before,
-                        x => x.MatchLdcR4(1000f)
-                    ))
+                        x => x.MatchCallOrCallvirt<Component>(nameof(Component.GetComponent))) &&
+                        c.TryGotoPrev(MoveType.Before,
+                        x => x.MatchLdcR4(out _))
+                    )
                     {
                         c.Next.Operand = Configs.eccentricVaseMaxDist.Value;
                         hookFailed = false;

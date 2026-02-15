@@ -14,7 +14,7 @@ namespace SuperCyanTweaks
     [BepInDependency("Jeffdev.FalseSonBossTweaks", BepInDependency.DependencyFlags.SoftDependency)] // Phase 2 enemy tweaks of this mod can't be conventionally turned off, so I have to forcibly acquire priority
 
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.4")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.5")]
 
     public class Main : BaseUnityPlugin
     {
@@ -50,6 +50,8 @@ namespace SuperCyanTweaks
             // Changes - Items
             new EclipseLite();
             new EmpathyCores();
+            new GenesisLoop();
+            new GrowthNectar();
             new HalcyonSeed();
             new HappiestMask();
             new OldWarStealthkit();
@@ -74,6 +76,9 @@ namespace SuperCyanTweaks
             // Changes - Stages
             new Commencement();
             new RallypointDelta();
+
+            // Changes - Survivors
+            new Drifter();
 
             // Changes - Miscellaneous
             new Eclipse();

@@ -26,7 +26,7 @@ namespace SuperCyanTweaks
                         c.TryGotoPrev(MoveType.Before,
                         x => x.MatchCallvirt("RoR2.TeamComponent", "get_teamIndex")) &&
                         c.TryGotoNext(MoveType.Before,
-                        x => x.MatchLdcI4(2))
+                        x => x.MatchLdcI4(out _))
                     )
                     {
                         c.Next.OpCode = OpCodes.Ldc_I4_1;
@@ -56,7 +56,7 @@ namespace SuperCyanTweaks
                         c.TryGotoPrev(MoveType.Before,
                         x => x.MatchCallvirt("RoR2.TeamComponent", "get_teamIndex")) &&
                         c.TryGotoNext(MoveType.Before,
-                        x => x.MatchLdcI4(2))
+                        x => x.MatchLdcI4(out _))
                     )
                     {
                         c.Next.OpCode = OpCodes.Ldc_I4_1;

@@ -4,7 +4,7 @@ namespace SuperCyanTweaks
 {
     public static class Configs
     {
-        // ==================== MONSTERS ==================== //
+        // ==================== MOD ==================== //
         public static ConfigEntry<bool> disableByDefault { get; private set; }
 
         // ==================== MONSTERS ==================== //
@@ -52,7 +52,11 @@ namespace SuperCyanTweaks
         // ==================== ITEMS ==================== //
         public static ConfigEntry<float> eclipseLiteBarrierBase { get; private set; }
         public static ConfigEntry<float> eclipseLiteBarrierStack { get; private set; }
+        public static ConfigEntry<bool> eclipseLiteCountShields { get; private set; }
         public static ConfigEntry<bool> empathyCoresDamageTweak { get; private set; }
+        public static ConfigEntry<float> genesisLoopProcCoeff { get; private set; }
+        public static ConfigEntry<bool> genesisLoopLosTweak { get; private set; }
+        public static ConfigEntry<int> growthNectarBuffCount { get; private set; }
         public static ConfigEntry<bool> allyAurelioniteTaunt { get; private set; }
         public static ConfigEntry<float> allyAurelioniteTauntRange { get; private set; }
         public static ConfigEntry<float> allyAurelioniteTauntDuration { get; private set; }
@@ -94,6 +98,11 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> fanSpeedBoost { get; private set; }
         public static ConfigEntry<float> fanBuffDuration { get; private set; }
         public static ConfigEntry<float> fanBuffStrength { get; private set; }
+
+        // ==================== SURVIVORS ==================== //
+        public static ConfigEntry<float> drifterCubeSearchAngle { get; private set; }
+        public static ConfigEntry<float> drifterCubeSearchDistance { get; private set; }
+        public static ConfigEntry<bool> drifterCleanupCooldownTweak { get; private set; }
 
         // ==================== MISCELLANEOUS ==================== //
         public static ConfigEntry<bool> eclipseTeamTweak { get; private set; }
@@ -185,9 +194,17 @@ namespace SuperCyanTweaks
             // Eclipse Lite
             eclipseLiteBarrierBase = cfg.Bind("Items - Eclipse Lite", "Base Barrier Percentage", -1f, "Set the barrier gain per second of cooldown, in percentage. Vanilla is 1%. Set to a negative value for no change.");
             eclipseLiteBarrierStack = cfg.Bind("Items - Eclipse Lite", "Stack Barrier Percentage", disableByDefault.Value ? -1f : .5f, "Set the barrier gain per second of cooldown, in percentage. Vanilla is 0.25%. Set to a negative value for no change.");
+            eclipseLiteCountShields = cfg.Bind("Items - Eclipse Lite", "Count Shields", !disableByDefault.Value, "Barrier gain is calculated using max health + shields instead of just max health.");
 
             // Empathy Cores
             empathyCoresDamageTweak = cfg.Bind("Items - Empathy Cores", "Empathy Cores Damage Tweak", !disableByDefault.Value, "Empathy Cores damage boost affects skill damage instead of base damage.\nThis nerfs synergies that depend on base damage, notably the chainguns from Spare Drone Parts.");
+
+            // Genesis Loop
+            genesisLoopProcCoeff = cfg.Bind("Items - Genesis Loop", "Proc Coefficient", disableByDefault.Value ? -1f : 3f, "Set the prof coefficient of the blast. Vanilla is 1. Set to a negative value for no change.");
+            genesisLoopLosTweak = cfg.Bind("Items - Genesis Loop", "Line of Sight Tweak", !disableByDefault.Value, "The blast will ignore line of sight if used by a Player team member.");
+
+            // Growth Nectar
+            growthNectarBuffCount = cfg.Bind("Items - Growth Nectar", "Buff Count", disableByDefault.Value ? -1 : 5, "Set the maximum amount of buffs per stack this item can register. Vanilla is 4. Set to a negative value for no change.");
 
             // Halcyon Seed
             allyAurelioniteTaunt = cfg.Bind("Items - Halcyon Seed", "Aurelionite Taunt", !disableByDefault.Value, "Aurelionite will get the attention of nearby enemies upon spawning, as well as any enemy that gets hit.");
@@ -261,6 +278,13 @@ namespace SuperCyanTweaks
             fanSpeedBoost = cfg.Bind("Stages - Rallypoint Delta", "Enable Fan Speed Boost", !disableByDefault.Value, "Taking the fans temporarily increases movement speed for players.");
             fanBuffDuration = cfg.Bind("Stages - Rallypoint Delta", "Fan Buff Duration", disableByDefault.Value ? -1f : 10f, "Set the duration of the speed boost, in seconds.");
             fanBuffStrength = cfg.Bind("Stages - Rallypoint Delta", "Fan Buff Strength", disableByDefault.Value ? -1f : 50f, "Additively increase movement speed by this percentage while under the effects of the buff.");
+
+            // ==================== SURVIVORS ==================== //
+
+            // Drifter
+            drifterCubeSearchAngle = cfg.Bind("Survivors - Drifter", "Junk Cube Search Angle", disableByDefault.Value ? -1f : 15f, "Set the maximum angle at which Junk Cube will automatically lock on to a target when hit. Vanilla is 8. Set to a negative value for no change.");
+            drifterCubeSearchDistance = cfg.Bind("Survivors - Drifter", "Junk Cube Search Distance", disableByDefault.Value ? -1f : 50f, "Set the maximum distance at which Junk Cube will automatically lock on to a target when hit. Vanilla is 40. Set to a negative value for no change.");
+            drifterCleanupCooldownTweak = cfg.Bind("Survivors - Drifter", "Cleanup Doesn’t Reset Cooldown", !disableByDefault.Value, "Using Cleanup no longer resets the skill's cooldown.\nJunk Cube doesn't have that quirk, as a matter of fact.");
 
             // ==================== MISC ==================== //
 
