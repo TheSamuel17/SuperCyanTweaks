@@ -141,6 +141,14 @@ namespace SuperCyanTweaks
                 $"Recharges after 15 seconds.",
                 "en"
             );
+
+            LanguageAPI.Add("ITEM_PHYSICSPROJECTILE_DESC",
+                $"获得<style=cIsHealing>友善的独一单位</style>，它会冲向敌人造成<style=cIsDamage>{ramDamageString}%</style> <style=cStack>(+{ramDamageString}%每层堆叠)</style> <style=cIsDamage>伤害</style>。" +
+                $"该单位继承你<style=cIsUtility>移动速度物品</style>的效果，且<style=cIsDamage>移动速度越快，伤害越高</style>。" +
+                $"互动抚摸该单位可<style=cIsHealing>净化负面效果</style>。" +
+                $"冷却时间15秒。",
+                "zh-CN"
+            );
         }
     }
 }

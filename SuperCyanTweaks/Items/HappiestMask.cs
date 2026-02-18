@@ -49,6 +49,12 @@ namespace SuperCyanTweaks
                 $"Lasts <style=cIsDamage>30s</style> <style=cStack>(+30s per stack)</style>.",
                 "en"
             );
+
+            LanguageAPI.Add("ITEM_GHOSTONKILL_DESC",
+                $"击杀敌人时有<style=cIsDamage>{procChanceString}%</style>的几率<style=cIsDamage>生成该敌人的幽灵</style>，幽灵拥有<style=cIsDamage>1500%</style>伤害。" +
+                $"持续<style=cIsDamage>30秒</style> <style=cStack>(每层堆叠+30秒)</style>。",
+                "zh-CN"
+            );
         }
     }
 }

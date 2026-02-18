@@ -66,6 +66,12 @@ namespace SuperCyanTweaks
                 $"Each molotov leaves a burning area for <style=cIsDamage>{tickString}% damage per second</style>.",
                 "en"
             );
+
+            LanguageAPI.Add("EQUIPMENT_MOLOTOV_DESC",
+                $"投掷<style=cIsDamage>6</style>枚燃烧瓶，对敌人造成<style=cIsDamage>{dmgString}%</style>基础伤害并使其<style=cIsDamage>点燃</style>。" +
+                $"每枚燃烧瓶会留下一片燃烧区域，每秒造成<style=cIsDamage>{tickString}%</style>伤害。",
+                "zh-CN"
+            );
         }
     }
 }

@@ -71,6 +71,11 @@ namespace SuperCyanTweaks
                 $"Gain the <style=cIsDamage>power</style> of any killed elite monster for <style=cIsDamage>{baseDurationString}s</style> <style=cStack>(+{stackDurationString}s per stack)</style>.",
                 "en"
             );
+
+            LanguageAPI.Add("ITEM_HEADHUNTER_DESC",
+                $"获得所击杀精英怪物的<style=cIsDamage>力量</style>，持续<style=cIsDamage>{baseDurationString}秒</style> <style=cStack>(每层堆叠+{stackDurationString}秒)</style>。",
+                "zh-CN"
+            );
         }
     }
 }

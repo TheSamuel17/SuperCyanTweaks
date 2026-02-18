@@ -64,6 +64,12 @@ namespace SuperCyanTweaks
                 $"Recharges every <style=cIsUtility>30 seconds</style> <style=cStack>(-50% per stack)</style>.",
                 "en"
             );
+
+            LanguageAPI.Add("ITEM_PHASING_DESC",
+                $"生命值低于<style=cIsHealth>{thresholdString}%</style>时，获得<style=cIsUtility>40%移动速度</style>和<style=cIsUtility>隐身</style>，持续<style=cIsUtility>5秒</style>。" +
+                $"冷却时间<style=cIsUtility>30秒</style> <style=cStack>(每层堆叠-50%)</style>。",
+                "zh-CN"
+            );
         }
     }
 }

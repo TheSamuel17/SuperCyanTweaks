@@ -108,6 +108,11 @@ namespace SuperCyanTweaks
                 $"When a skill comes off cooldown, gain a <style=cIsDamage>temporary barrier</style> for <style=cIsHealing>{baseBarrierString}%</style> <style=cStack>(+{stackBarrierString}% per stack)</style> of your maximum health per second of the skill's base cooldown.",
                 "en"
             );
+
+            LanguageAPI.Add("ITEM_BARRIERONCOOLDOWN_DESC",
+                $"当技能冷却结束时，基于该技能基础冷却时间的每秒，获得相当于最大生命值<style=cIsHealing>{baseBarrierString}%</style><style=cStack>(+{stackBarrierString}% 每层堆叠)</style>的临时护盾 <style=cIsDamage></style>。",
+                "zh-CN"
+            );
         }
     }
 }

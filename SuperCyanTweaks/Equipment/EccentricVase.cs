@@ -101,6 +101,12 @@ namespace SuperCyanTweaks
                 $"Lasts 30 seconds.",
                 "en"
             );
+
+            LanguageAPI.Add("EQUIPMENT_GATEWAY_DESC",
+                $"生成一条最长为<style=cIsUtility>{distanceString}米</style>的<style=cIsUtility>量子隧道</style>。" +
+                $"持续30秒。",
+                "zh-CN"
+            );
         }
     }
 }

@@ -189,6 +189,19 @@ namespace SuperCyanTweaks
                 $"<style=cStack>(La rareté de l'objet augmente à chaque cumul).</style>",
                 "fr"
             );
+
+            // ========== CHINESE ========== //
+
+            LanguageAPI.Add("ITEM_ITEMDROPCHANCEONKILL_PICKUP",
+                $"击杀首领时会额外掉落一件物品。",
+                "zh-CN"
+            );
+
+            LanguageAPI.Add("ITEM_ITEMDROPCHANCEONKILL_DESC",
+                $"击杀首领时掉落一件物品（{tier1String}%/<style=cIsHealing>{tier2String}%</style>/<style=cIsHealth>{tier3String}%</style>）。" +
+                $"<style=cStack>每层堆叠提高道具稀有度概率。</style>",
+                "zh-CN"
+            );
         }
     }
 }
