@@ -66,6 +66,12 @@ namespace SuperCyanTweaks
             );
 
             LanguageAPI.Add("ITEM_PHASING_DESC",
+                $"Tomber en dessous de <style=cIsHealth>{threshold} % de vos PV</style> vous fait gagner <style=cIsUtility>40 % de vitesse de déplacement</style> et vous rend <style=cIsUtility>invisible</style> pendant <style=cIsUtility>5 s</style>. " +
+                $"Se recharge toutes les <style=cIsUtility>30 secondes</style> <style=cStack>(-50 % par cumul)</style>.",
+                "fr"
+            );
+
+            LanguageAPI.Add("ITEM_PHASING_DESC",
                 $"生命值低于<style=cIsHealth>{thresholdString}%</style>时，获得<style=cIsUtility>40%移动速度</style>和<style=cIsUtility>隐身</style>，持续<style=cIsUtility>5秒</style>。" +
                 $"冷却时间<style=cIsUtility>30秒</style> <style=cStack>(每层堆叠-50%)</style>。",
                 "zh-CN"

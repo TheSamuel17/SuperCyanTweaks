@@ -3,6 +3,8 @@ using RoR2.CharacterAI;
 using R2API;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace SuperCyanTweaks
 {
@@ -48,6 +50,32 @@ namespace SuperCyanTweaks
             if (Configs.clayApothecarySlamSelfDmg.Value >= 0)
             {                
                 clayGrenadierFaceSlam.TryModifyFieldValue("healthCostFraction", Configs.clayApothecarySlamSelfDmg.Value / 100f);
+            }
+
+            // Slam/Mortar targeting
+            if (Configs.clayApothecaryMortarTargeting.Value == true)
+            {
+                bool hookFailed = true;
+                IL.EntityStates.ClayGrenadier.FaceSlam.FixedUpdate += (il) =>
+                {
+                    ILCursor c = new(il);
+
+                    if (
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchStfld<BullseyeSearch>("sortMode"))
+                    )
+                    {
+                        c.Index--;
+                        c.Next.OpCode = OpCodes.Ldc_I4_2;
+
+                        hookFailed = false;
+                    }
+
+                    if (hookFailed == true)
+                    {
+                        Log.Error("Clay Apothecary mortar targeting hook failed!");
+                    }
+                };
             }
         }
     }

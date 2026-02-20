@@ -7,6 +7,7 @@ You may turn off each change at your convenience.
 ## Credits
 
 * .score, Moffein, Nuxlar & Wolfo, for writing helpful and sometimes yoinkable code.
+* JunJun5406, for translating the item description changes to Simplified Chinese.
 * The denizens of `#development`, for answering my questions. Shoutouts MysticalChicken.
 
 ## Contact

@@ -110,6 +110,11 @@ namespace SuperCyanTweaks
             );
 
             LanguageAPI.Add("ITEM_BARRIERONCOOLDOWN_DESC",
+                $"Lorsque le temps de rechargement d'une compétence se termine, octroie une <style=cIsDamage>barrière temporaire</style> à hauteur de <style=cIsHealing>{baseBarrier} %</style> <style=cStack>(+{stackBarrier} % par cumul)</style> de vos PV max par seconde du temps de rechargement basique de la compétence.",
+                "fr"
+            );
+
+            LanguageAPI.Add("ITEM_BARRIERONCOOLDOWN_DESC",
                 $"当技能冷却结束时，基于该技能基础冷却时间的每秒，获得相当于最大生命值<style=cIsHealing>{baseBarrierString}%</style><style=cStack>(+{stackBarrierString}% 每层堆叠)</style>的临时护盾 <style=cIsDamage></style>。",
                 "zh-CN"
             );

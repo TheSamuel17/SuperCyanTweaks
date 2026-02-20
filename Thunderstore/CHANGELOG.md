@@ -1,3 +1,10 @@
+## 1.0.6
+
+- Implemented Chinese translation, courtesy of JunJun5406. I noticed the pull request too late, so if you're reading this, Growth Nectar needs a pass.
+- Finished the French translation.
+- Frost Relic can now crit.
+- Clay Apothecary mortar blast now sorts by angle only instead of "distance and angle", which often practically randomized its target. It should now more consistently aim at its intended target.
+
 ## 1.0.5
 
 - Removed any and all jank from the Rallypoint Delta fan buff logic. In completely unrelated news, I now know what a `JumpVolume` is.

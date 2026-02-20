@@ -73,6 +73,11 @@ namespace SuperCyanTweaks
             );
 
             LanguageAPI.Add("ITEM_HEADHUNTER_DESC",
+                $"Offre la <style=cIsDamage>puissance</style> de n'importe quel monstre d'élite tué pendant <style=cIsDamage>{baseDuration} s</style> <style=cStack>(+{stackDuration} s par cumul)</style>.",
+                "fr"
+            );
+
+            LanguageAPI.Add("ITEM_HEADHUNTER_DESC",
                 $"获得所击杀精英怪物的<style=cIsDamage>力量</style>，持续<style=cIsDamage>{baseDurationString}秒</style> <style=cStack>(每层堆叠+{stackDurationString}秒)</style>。",
                 "zh-CN"
             );

@@ -18,6 +18,7 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> clayApothecaryTarBallRange { get; private set; }
         public static ConfigEntry<float> clayApothecaryMortarHealthThreshold { get; private set; }
         public static ConfigEntry<float> clayApothecarySlamSelfDmg { get; private set; }
+        public static ConfigEntry<bool> clayApothecaryMortarTargeting { get; private set; }
         public static ConfigEntry<bool> falseSonGolemCountTweak { get; private set; }
         public static ConfigEntry<int> geepCost { get; private set; }
         public static ConfigEntry<int> grandparentCost { get; private set; }
@@ -54,6 +55,7 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> eclipseLiteBarrierStack { get; private set; }
         public static ConfigEntry<bool> eclipseLiteCountShields { get; private set; }
         public static ConfigEntry<bool> empathyCoresDamageTweak { get; private set; }
+        public static ConfigEntry<bool> frostRelicCrit { get; private set; }
         public static ConfigEntry<float> genesisLoopProcCoeff { get; private set; }
         public static ConfigEntry<bool> genesisLoopLosTweak { get; private set; }
         public static ConfigEntry<int> growthNectarBuffCount { get; private set; }
@@ -132,6 +134,7 @@ namespace SuperCyanTweaks
             clayApothecaryTarBallRange = cfg.Bind("Enemies - Clay Apothecary", "Max Tar Ball Range", disableByDefault.Value ? -1f : 75f, "Clay Apothecaries will attack from this far away with tar balls. Vanilla is 65. Set to a negative value for no change.");
             clayApothecaryMortarHealthThreshold = cfg.Bind("Enemies - Clay Apothecary", "Ranged Mortar Health Threshold", disableByDefault.Value ? -1f : 1f, "Clay Apothecaries will use their slam/mortar attack at range under this health fraction. Vanilla is 0.5. Set to a negative value for no change.");
             clayApothecarySlamSelfDmg = cfg.Bind("Enemies - Clay Apothecary", "Slam Self-Damage", disableByDefault.Value ? -1f : 0f, "Clay Apothecaries will lose this percentage of their current health when using the slam/mortar attack. Vanilla is 5. Set to a negative value for no change.");
+            clayApothecaryMortarTargeting = cfg.Bind("Enemies - Clay Apothecary", "Mortar Targeting", !disableByDefault.Value, "Mortar targets are sorted by angle only instead of this weird 'angle and distance' algorithm.\nThe attack will more reliably aim itself at the Clay Apothecary's target.");
 
             // False Son
             falseSonGolemCountTweak = cfg.Bind("Enemies - False Son", "Golem Count Scales With Stage Count", !disableByDefault.Value, "The maximum number of enemies that can spawn during Phase 2 is directly proportional to the current stage count.\nThus, it will be reduced from 5 to 4 if fought without looping.");
@@ -198,6 +201,9 @@ namespace SuperCyanTweaks
 
             // Empathy Cores
             empathyCoresDamageTweak = cfg.Bind("Items - Empathy Cores", "Empathy Cores Damage Tweak", !disableByDefault.Value, "Empathy Cores damage boost affects skill damage instead of base damage.\nThis nerfs synergies that depend on base damage, notably the chainguns from Spare Drone Parts.");
+
+            // Frost Relic
+            frostRelicCrit = cfg.Bind("Items - Frost Relic", "Frost Relic Crit", !disableByDefault.Value, "Allow the Frost Relic to crit. Vanilla is false.");
 
             // Genesis Loop
             genesisLoopProcCoeff = cfg.Bind("Items - Genesis Loop", "Proc Coefficient", disableByDefault.Value ? -1f : 3f, "Set the prof coefficient of the blast. Vanilla is 1. Set to a negative value for no change.");

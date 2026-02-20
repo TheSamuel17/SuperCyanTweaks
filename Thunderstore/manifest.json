@@ -1,6 +1,6 @@
 ﻿{
 	"name": "SuperCyanTweaks",
-	"version_number": "1.0.5",
+	"version_number": "1.0.6",
 	"website_url": "https://github.com/TheSamuel17/SuperCyanTweaks",
 	"description": "A collection of miscellaneous, self-indulgent and highly configurable changes that are either absent or too inconvenient to set up in other mods.",
 	"dependencies": [
@@ -10,6 +10,6 @@
 		"RiskofThunder-R2API_Director-2.3.8",
 		"RiskofThunder-R2API_ContentManagement-1.0.10",
 		"RiskofThunder-R2API_Language-1.1.0",
-		"RiskofThunder-R2API_RecalculateStats-1.6.5"
+		"RiskofThunder-R2API_RecalculateStats-1.6.6"
 	]
 }

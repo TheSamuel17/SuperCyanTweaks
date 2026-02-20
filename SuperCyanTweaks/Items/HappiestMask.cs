@@ -51,6 +51,12 @@ namespace SuperCyanTweaks
             );
 
             LanguageAPI.Add("ITEM_GHOSTONKILL_DESC",
+                $"En cas d'ennemi tué, vous avez <style=cIsDamage>{procChance} %</style> de chance de <style=cIsDamage>faire apparaître un fantôme</style> de votre victime qui inflige <style=cIsDamage>1500 %</style> de dégâts. " +
+                $"Dure <style=cIsDamage>30 s</style> <style=cStack>(+30 s par cumul)</style>.",
+                "fr"
+            );
+
+            LanguageAPI.Add("ITEM_GHOSTONKILL_DESC",
                 $"击杀敌人时有<style=cIsDamage>{procChanceString}%</style>的几率<style=cIsDamage>生成该敌人的幽灵</style>，幽灵拥有<style=cIsDamage>1500%</style>伤害。" +
                 $"持续<style=cIsDamage>30秒</style> <style=cStack>(每层堆叠+30秒)</style>。",
                 "zh-CN"
