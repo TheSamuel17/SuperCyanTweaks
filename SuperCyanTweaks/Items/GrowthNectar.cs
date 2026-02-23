@@ -54,6 +54,11 @@ namespace SuperCyanTweaks
             );
 
             LanguageAPI.Add("ITEM_BOOSTALLSTATS_DESC",
+                $"每层增益使<style=cIsUtility>所有属性</style>提升<style=cIsUtility>4%</style>，最多叠加至<style=cIsUtility>{buffCountString}</style>层<style=cStack>(每层叠加+{buffCountString})</style>。",
+                "zh-CN"
+            );
+
+            LanguageAPI.Add("ITEM_BOOSTALLSTATS_DESC",
                 $"Augmente <style=cIsUtility>TOUTES les statistiques</style> de <style=cIsUtility>4 %</style> pour chaque bonus, jusqu'à <style=cIsUtility>{buffCountString}</style> maximum <style=cStack>(+{buffCountString} par cumul)</style>.",
                 "fr"
             );
