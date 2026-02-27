@@ -8,6 +8,9 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> disableByDefault { get; private set; }
 
         // ==================== MONSTERS ==================== //
+        public static ConfigEntry<bool> alloyHunterLaserCooldownTweak { get; private set; }
+        public static ConfigEntry<float> awuShieldDuration { get; private set; }
+        public static ConfigEntry<float> awuDelaySuperAttackCooldown { get; private set; }
         public static ConfigEntry<bool> alphaConstructTeleportEnabled { get; private set; }
         public static ConfigEntry<float> alphaConstructTeleportMinDist { get; private set; }
         public static ConfigEntry<float> alphaConstructTeleportCooldown { get; private set; }
@@ -34,6 +37,9 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> halcyoniteProperCategory { get; private set; }
         public static ConfigEntry<bool> impOnHelminthRoost { get; private set; }
         public static ConfigEntry<float> lemurianFireballRange { get; private set; }
+        public static ConfigEntry<int> lunarExploderCost { get; private set; }
+        public static ConfigEntry<int> lunarWispCostOutsideMoon { get; private set; }
+        public static ConfigEntry<int> lunarWispCostOnMoon { get; private set; }
         public static ConfigEntry<float> mushrumSprintDist { get; private set; }
         public static ConfigEntry<float> mushrumSprintCoeff { get; private set; }
         public static ConfigEntry<bool> mushrumOnHabitatFall { get; private set; }
@@ -47,6 +53,8 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> probeOnRepurposedCrater { get; private set; }
         public static ConfigEntry<bool> probeOnSolusEvent { get; private set; }
         public static ConfigEntry<bool> probeDelayAttackOnSpawn { get; private set; }
+        public static ConfigEntry<bool> prospectorSingleHit { get; private set; }
+        public static ConfigEntry<float> prospectorAttackRange { get; private set; }
         public static ConfigEntry<int> transporterCost { get; private set; }
         public static ConfigEntry<int> voidReaverCost { get; private set; }
 
@@ -92,11 +100,18 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> gunnerTurretRange { get; private set; }
 
         // ==================== INTERACTABLES ==================== //
+        public static ConfigEntry<bool> accessNodeMultiplyRewards { get; private set; }
         public static ConfigEntry<int> droneScrapperMaxCount { get; private set; }
         public static ConfigEntry<bool> droneScrapperOnHabitat { get; private set; }
+        public static ConfigEntry<bool> shrineOfOrderOnStage4 { get; private set; }
 
         // ==================== STAGES ==================== //
         public static ConfigEntry<bool> moonCauldronTweak { get; private set; }
+        public static ConfigEntry<int> moonInitialMonsterCredits { get; private set; }
+        public static ConfigEntry<float> moonPillarRadius { get; private set; }
+        public static ConfigEntry<float> moonPillarMassDuration { get; private set; }
+        public static ConfigEntry<int> moonPillarMonsterCredits { get; private set; }
+        public static ConfigEntry<bool> nestSnowyShrines { get; private set; }
         public static ConfigEntry<bool> fanSpeedBoost { get; private set; }
         public static ConfigEntry<float> fanBuffDuration { get; private set; }
         public static ConfigEntry<float> fanBuffStrength { get; private set; }
@@ -108,6 +123,8 @@ namespace SuperCyanTweaks
 
         // ==================== MISCELLANEOUS ==================== //
         public static ConfigEntry<bool> eclipseTeamTweak { get; private set; }
+        public static ConfigEntry<bool> perfectedCrippleProcCoeff { get; private set; }
+        public static ConfigEntry<float> perfectedHealthMultiplier { get; private set; }
 
         public static void Init(ConfigFile cfg)
         {
@@ -116,6 +133,13 @@ namespace SuperCyanTweaks
             disableByDefault = cfg.Bind("!Mod", "Disable New Configs", false, "If set to true, newly generated configs will always be disabled by default.");
 
             // ==================== MONSTERS ==================== //
+
+            // Alloy Hunter
+            alloyHunterLaserCooldownTweak = cfg.Bind("Enemies - Alloy Hunter", "Laser Cooldown Tweak", !disableByDefault.Value, "The laser's cooldown now begins when the skill ends. Vanilla is false.\nNotably stops perma-lasering behavior on E8.");
+
+            // Alloy Worship Unit
+            awuShieldDuration = cfg.Bind("Enemies - Alloy Worship Unit", "Shield Duration", disableByDefault.Value ? -1f : 5f, "Set how long the super attack's shields last. Vanilla is 6. Set to a negative value for no change.");
+            awuDelaySuperAttackCooldown = cfg.Bind("Enemies - Alloy Worship Unit", "Delay Super Attack Cooldown", disableByDefault.Value ? 0f : 5f, "Delay the super attack's cooldown by this many seconds. Set to a negative value (or zero) for no change.");
 
             // Alpha Construct
             alphaConstructTeleportEnabled = cfg.Bind("Enemies - Alpha Construct", "Teleport To Players", !disableByDefault.Value, "Alpha Constructs that are out of range will periodically teleport near a target. Vanilla is false.");
@@ -165,6 +189,13 @@ namespace SuperCyanTweaks
             // Lemurian
             lemurianFireballRange = cfg.Bind("Enemies - Lemurian", "Max Fireball Range", disableByDefault.Value ? -1f : 45f, "Lemurians will attack from this far away with fireballs. Strafe range is still capped at 30m. Vanilla is 30. Set to a negative value for no change.");
 
+            // Lunar Exploder
+            lunarExploderCost = cfg.Bind("Enemies - Lunar Exploder", "Spawn Cost", disableByDefault.Value ? -1 : 40, "Set the director credit cost. Vanilla is 80. Set to a negative value for no change.");
+
+            // Lunar Wisp
+            lunarWispCostOutsideMoon = cfg.Bind("Enemies - Lunar Wisp", "Spawn Cost Outside Commencement", disableByDefault.Value ? -1 : 450, "Set the director credit cost outside of Commencement. Vanilla is 550. Set to a negative value for no change.");
+            lunarWispCostOnMoon = cfg.Bind("Enemies - Lunar Wisp", "Spawn Cost on Commencement", -1, "Set the director credit cost on Commencement. Vanilla is 550. Set to a negative value for no change.");
+
             // Mini Mushrum
             mushrumSprintDist = cfg.Bind("Enemies - Mini Mushrum", "Sprint Distance", disableByDefault.Value ? -1f : 60f, "Mini Mushrums start sprinting from this far away. Set to a negative value to disable.");
             mushrumSprintCoeff = cfg.Bind("Enemies - Mini Mushrum", "Sprint Coefficient", disableByDefault.Value ? -1f : 3f, "Set the sprint speed multiplier to this value. Vanilla is 2.5. Set to a negative value for no change.");
@@ -185,6 +216,10 @@ namespace SuperCyanTweaks
             probeOnRepurposedCrater = cfg.Bind("Enemies - Solus Probe", "Spawn on Repurposed Crater", !disableByDefault.Value, "Solus Probes appear on Repurposed Crater.");
             probeOnSolusEvent = cfg.Bind("Enemies - Solus Probe", "Add to Solus Family Event", !disableByDefault.Value, "Solus Probes appear during the Solus Family Event.");
             probeDelayAttackOnSpawn = cfg.Bind("Enemies - Solus Probe", "Delay Attack After Spawning", !disableByDefault.Value, "Adds a small delay between spawning and throwing out their first attack.");
+
+            // Solus Prospector
+            prospectorSingleHit = cfg.Bind("Enemies - Solus Prospector", "Single Hit", !disableByDefault.Value, "Prevents them from hitting you multiple times per attack.");
+            prospectorAttackRange = cfg.Bind("Enemies - Solus Prospector", "Max Attack Range", -1f, "Solus Prospectors will initiate their attack from this far away. Vanilla is 12 or 15 depending on the situation. Set to a negative value for no change.");
 
             // Solus Transporter
             transporterCost = cfg.Bind("Enemies - Solus Transporter", "Spawn Cost", disableByDefault.Value ? -1 : 125, "Set the director credit cost. Vanilla is 200. Set to a negative value for no change.");
@@ -271,14 +306,27 @@ namespace SuperCyanTweaks
 
             // ==================== INTERACTABLES ==================== //
 
+            // Access Node
+            accessNodeMultiplyRewards = cfg.Bind("Interactables - Access Node", "Multiply Item Rewards", !disableByDefault.Value, "Instead of adding +1 item per player, it will double the amount.\nSince Access Node is multiplicative with Mountain Shrines, the rewards will be as well.");
+
             // Drone Scrapper
             droneScrapperMaxCount = cfg.Bind("Interactables - Drone Scrapper", "Max Count", disableByDefault.Value ? -1 : 1, "Set the maximum amount of times it can spawn per stage. Vanilla is -1. Set to negative for no limit.");
             droneScrapperOnHabitat = cfg.Bind("Interactables - Drone Scrapper", "Spawn on Treeborn Colony", !disableByDefault.Value, "Drone Scrappers appear on Treeborn Colony & Golden Dieback.");
+
+            // Shrine of Order
+            shrineOfOrderOnStage4 = cfg.Bind("Interactables - Shrine of Order", "Spawn on Stage 4", !disableByDefault.Value, "A Shrine of Order will spawn in a fixed location on every Stage 4.");
 
             // ==================== STAGES ==================== //
 
             // Commencement
             moonCauldronTweak = cfg.Bind("Stages - Commencement", "Cauldron Tweak", !disableByDefault.Value, "Blacklist items tagged with 'OnStageBeginEffet', which includes things like Rusted Key/Sale Star.");
+            moonInitialMonsterCredits = cfg.Bind("Stages - Commencement", "Initial Monster Credits", disableByDefault.Value ? -1 : 450, "Set the base amount of initial monster credits for this stage. Vanilla is 900. Set to a negative value for no change.");
+            moonPillarRadius = cfg.Bind("Stages - Commencement", "Pillar Charge Radius", disableByDefault.Value ? -1f : 25f, "Set the charge radius of the Pillars. Vanilla is 20. Set to a negative value for no change.");
+            moonPillarMassDuration = cfg.Bind("Stages - Commencement", "Pillar of Mass Charge Time", disableByDefault.Value ? -1f : 45f, "Set how long it takes to charge a Pillar of Mass. Vanilla is 60. Set to a negative value for no change.");
+            moonPillarMonsterCredits = cfg.Bind("Stages - Commencement", "Pillar Monster Credits", disableByDefault.Value ? -1 : 720, "Set the amount of credits each pillar can spend to spawn monsters. Vanilla is 700. Set to a negative value for no change.");
+
+            // Pretender's Precipice
+            nestSnowyShrines = cfg.Bind("Stages - Pretender’s Precipice", "Snowy Shrines", !disableByDefault.Value, "Shrines will spawn as their snowy variants on this stage.");
 
             // Rallypoint Delta
             fanSpeedBoost = cfg.Bind("Stages - Rallypoint Delta", "Enable Fan Speed Boost", !disableByDefault.Value, "Taking the fans temporarily increases movement speed for players.");
@@ -296,6 +344,10 @@ namespace SuperCyanTweaks
 
             // Eclipse
             eclipseTeamTweak = cfg.Bind("Miscellaneous - Eclipse", "E4/E7 Team Tweak", !disableByDefault.Value, "Apply the vanilla Eclipse 4 & 7 modifiers to other non-ally teams, such as Void. Vanilla is false.");
+
+            // Perfected Elite
+            perfectedCrippleProcCoeff = cfg.Bind("Miscellaneous - Perfected Elite", "Cripple Proc Coefficient", !disableByDefault.Value, "Cripple duration scales with the hit's proc coefficient.");
+            perfectedHealthMultiplier = cfg.Bind("Miscellaneous - Perfected Elite", "Base Health Multiplier", disableByDefault.Value ? -1f : 2.4f, "Set the base health multiplier for Perfected Elites. Vanilla is 2. Set to a negative value for no change.\nKeep in mind that this value will be multiplied by x1.25 due to the Aspect's effect.");
         }
     }
 }

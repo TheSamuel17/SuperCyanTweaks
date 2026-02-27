@@ -72,6 +72,12 @@ namespace SuperCyanTweaks
                 $"每枚燃烧瓶会留下一片燃烧区域，每秒造成<style=cIsDamage>{tickString}%</style>伤害。",
                 "zh-CN"
             );
+
+            LanguageAPI.Add("EQUIPMENT_MOLOTOV_DESC",
+                $"Lance <style=cIsDamage>6</style> cocktails molotov qui <style=cIsDamage>enflamment</style> les ennemis, leur infligeant <style=cIsDamage>{explosionDamage} % des dégâts de base</style>. " +
+                $"Chaque cocktail molotov laisse une zone de flammes infligeant <style=cIsDamage>{tickRate} % de dégâts par seconde</style>.",
+                "fr"
+            );
         }
     }
 }

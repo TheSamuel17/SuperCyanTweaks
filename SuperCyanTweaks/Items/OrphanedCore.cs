@@ -12,7 +12,6 @@ namespace SuperCyanTweaks
         public static GameObject friendUnitMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC3/FriendUnit/FriendUnitMaster.prefab").WaitForCompletion();
         public static GameObject friendUnitBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC3/FriendUnit/FriendUnitBody.prefab").WaitForCompletion();
 
-
         public OrphanedCore()
         {
             // Adjust ram damage
@@ -99,7 +98,7 @@ namespace SuperCyanTweaks
                             skillDriver.activationRequiresTargetLoS = true; // LoS check is helpful methinks.
                             skillDriver.selectionRequiresTargetLoS = true;
 
-                            return;
+                            break;
 
                         case "StrafeAroundEnemy":
                             if (skillDriver.minDistance > 0f)
@@ -112,7 +111,7 @@ namespace SuperCyanTweaks
                                 skillDriver.maxDistance = 20f;
                             }
 
-                            return;
+                            break;
 
                         case "NavigateToEnemy":
                             
@@ -124,7 +123,10 @@ namespace SuperCyanTweaks
                             skillDriver.selectionRequiresAimTarget = false; // Why are these set to true?
                             skillDriver.selectionRequiresTargetLoS = false;
 
-                            return;
+                            break;
+
+                        default:
+                            break;
                     }
                 }
             }

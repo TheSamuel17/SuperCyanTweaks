@@ -1,3 +1,28 @@
+## 1.0.7
+
+- Updated Chinese translation, courtesy of JunJun5406 (Growth Nectar was missing).
+- *Actually* finished the French translation.
+- A guaranteed Shrine of Order spawns in a fixed location on every Stage 4.
+- Shrines on Pretender's Precipice are now snowy like they should be.
+- Access Node + Mountain Shrine rewards are now multiplicative when both are activated, since the bosses themselves are.
+- Solus Prospector
+    - Can no longer hit you multiple times per attack.
+    - Configurable attack range. (Unchanged by default.)
+- Alloy Hunter: laser skill cooldown now begins when the skill ends, which prevents perma-lasering on E7.
+- Alloy Worship Unit
+    - Reduced shield duration while performing the super attack. (6s -> 5s)
+    - Super attack cooldown begins 5s after execution, matching the duration of the shield.
+- Commencement
+    - Initial monster credits reduced. (900 -> 450)
+    - Increased charge radius for all Pillars. (20m -> 25m)
+    - Decreased charge duration for Pillar of Mass. (60s -> 45s)
+    - Pillar monster credits slightly increased (700 -> 720) to better account for Lunar Exploder cost change. (2 Perfected + 5 Regular -> 3 Perfected)
+- Lunar Exploder credit cost decreased. (80 -> 40)
+- Lunar Wisp credit cost decreased outside of Commencement. (550 -> 450)
+- Perfected Elites
+    - Cripple duration is now affected by proc coefficient.
+    - Base health multiplier increased. (x2 -> x2.4, effectively x2.5 -> x3)
+
 ## 1.0.6
 
 - Implemented Chinese translation, courtesy of JunJun5406. I noticed the pull request too late, so if you're reading this, Growth Nectar needs a pass.

@@ -14,7 +14,7 @@ namespace SuperCyanTweaks
     [BepInDependency("Jeffdev.FalseSonBossTweaks", BepInDependency.DependencyFlags.SoftDependency)] // Phase 2 enemy tweaks of this mod can't be conventionally turned off, so I have to forcibly acquire priority
 
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.6")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.7")]
 
     public class Main : BaseUnityPlugin
     {
@@ -29,6 +29,8 @@ namespace SuperCyanTweaks
             Configs.Init(Config);
 
             // Changes - Enemies
+            new AlloyHunter();
+            new AlloyWorshipUnit();
             new AlphaConstruct();
             new Beetle();
             new BighornBison();
@@ -40,10 +42,13 @@ namespace SuperCyanTweaks
             new Halcyonite();
             new Imp();
             new Lemurian();
+            new LunarExploder();
+            new LunarWisp();
             new MiniMushrum();
             new SolusControlUnit();
             new SolusDistributor();
             new SolusProbe();
+            new SolusProspector();
             new SolusTransporter();
             new VoidReaver();
 
@@ -72,10 +77,13 @@ namespace SuperCyanTweaks
             new GunnerTurret();
 
             // Changes - Interactables
+            new AccessNode();
             new DroneScrapper();
+            new ShrineOfOrder();
 
             // Changes - Stages
             new Commencement();
+            new PretendersPrecipice();
             new RallypointDelta();
 
             // Changes - Survivors
@@ -83,6 +91,7 @@ namespace SuperCyanTweaks
 
             // Changes - Miscellaneous
             new Eclipse();
+            new PerfectedElite();
         }
     }
 }

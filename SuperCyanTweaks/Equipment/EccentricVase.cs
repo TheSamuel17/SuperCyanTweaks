@@ -107,6 +107,12 @@ namespace SuperCyanTweaks
                 $"持续30秒。",
                 "zh-CN"
             );
+
+            LanguageAPI.Add("EQUIPMENT_GATEWAY_DESC",
+                $"Crée un <style=cIsUtility>tunnel quantique</style> d'une longueur maximale de <style=cIsUtility>{distance} m</style>. " +
+                $"Dure 30 secondes.",
+                "fr"
+            );
         }
     }
 }
