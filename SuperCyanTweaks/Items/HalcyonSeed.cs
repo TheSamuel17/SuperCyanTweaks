@@ -59,6 +59,11 @@ namespace SuperCyanTweaks
             GlobalEventManager.onServerDamageDealt += OnServerDamageDealt;
         }
 
+        private void OnDisable()
+        {
+            GlobalEventManager.onServerDamageDealt -= OnServerDamageDealt;
+        }
+
         private void FixedUpdate()
         {
             if (age < distractDelay)

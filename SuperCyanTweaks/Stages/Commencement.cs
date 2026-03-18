@@ -39,10 +39,8 @@ namespace SuperCyanTweaks
 
         private void OnStageStartGlobal(Stage stage)
         {
-            if (SceneInfo.instance.sceneDef != SceneCatalog.FindSceneDef("moon2") && SceneInfo.instance.sceneDef != SceneCatalog.FindSceneDef("moon"))
-            {
-                return;
-            }
+            if (!SceneInfo.instance) return;
+            if (SceneInfo.instance.sceneDef != SceneCatalog.FindSceneDef("moon2") && SceneInfo.instance.sceneDef != SceneCatalog.FindSceneDef("moon")) return;
 
             List<PurchaseInteraction> instanceList = InstanceTracker.GetInstancesList<PurchaseInteraction>();
             foreach (PurchaseInteraction instance in instanceList)

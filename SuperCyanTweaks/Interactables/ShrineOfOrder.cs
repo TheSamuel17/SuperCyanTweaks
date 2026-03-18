@@ -63,6 +63,18 @@ namespace SuperCyanTweaks
                     rotation = new Vector3(0f, 45f, 0f);
                     break;
 
+                case "tropics_wormsworms":
+                    prefab = shrineRestackSandyPrefab;
+                    position = new Vector3(-137.3f, 1.35f, 88f);
+                    rotation = new Vector3(355f, 180f, 0f);
+                    break;
+
+                case "tropicsnight_wormsworms":
+                    prefab = shrineRestackSandyPrefab;
+                    position = new Vector3(-137.3f, 1.35f, 88f);
+                    rotation = new Vector3(355f, 180f, 0f);
+                    break;
+
                 default:
                     break;
             }

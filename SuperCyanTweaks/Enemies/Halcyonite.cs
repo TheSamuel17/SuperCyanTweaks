@@ -1,16 +1,22 @@
-﻿using R2API;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using R2API;
 using RoR2;
+using RoR2.CharacterAI;
 using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Networking;
 
 namespace SuperCyanTweaks
 {
     public class Halcyonite
     {
         public static GameObject halcyoniteBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Halcyonite/HalcyoniteBody.prefab").WaitForCompletion();
+        public static GameObject halcyoniteMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Halcyonite/HalcyoniteMaster.prefab").WaitForCompletion();
         public static CharacterSpawnCard cscHalcyonite = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC2/Halcyonite/cscHalcyonite.asset").WaitForCompletion();
         public static DirectorCardCategorySelection dccsFalseSonPhase2 = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/meridian/dccsFalseSonBossPhase2.asset").WaitForCompletion();
+        public static EntityStateConfiguration escWhirlwind = Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC2/Halcyonite/EntityStates.HalcyoniteMonster.WhirlwindPersuitCycle.asset").WaitForCompletion();
 
         public static DirectorCardCategorySelection[] dccsWithHalcyoniteChampion =
         {
@@ -126,6 +132,148 @@ namespace SuperCyanTweaks
                     }
                 }
             }
+
+            // Adjust director credit cost
+            if (Configs.halcyoniteCost.Value >= 0)
+            {
+                cscHalcyonite.directorCreditCost = Configs.halcyoniteCost.Value;
+            }
+
+            // Adjust laser attack
+            if (Configs.halcyoniteLaserNoPause.Value == true)
+            {
+                AISkillDriver[] skillDrivers = halcyoniteMasterPrefab.GetComponents<AISkillDriver>();
+                foreach (AISkillDriver skillDriver in skillDrivers)
+                {
+                    if (skillDriver.skillSlot == SkillSlot.Secondary)
+                    {
+                        skillDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+                    }
+                }
+            }
+
+            // Whirlwind buffs
+            if (Configs.halcyoniteWhirlwindBuff.Value == true)
+            {
+                // Whirlwind proc coefficient
+                IL.EntityStates.Halcyonite.WhirlWindPersuitCycle.UpdateAttack += (il) =>
+                {
+                    ILCursor c = new(il);
+                    bool hookFailed = true;
+
+                    if (
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchStfld<BlastAttack>("procCoefficient")) &&
+                        c.TryGotoPrev(MoveType.Before,
+                        x => x.MatchLdcR4(out _))
+                    )
+                    {
+                        c.Remove();
+                        c.Emit(OpCodes.Ldc_R4, .2f);
+
+                        hookFailed = false;
+                    }
+
+                    if (hookFailed == true)
+                    {
+                        Log.Error("Halcyonite Whirlwind proc coefficient hook failed!");
+                    }
+                };
+
+                // Whirlwind scales with attack speed
+                IL.EntityStates.Halcyonite.WhirlWindPersuitCycle.UpdateAttack += (il) =>
+                {
+                    ILCursor c = new(il);
+                    bool hookFailed = true;
+
+                    if (
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchLdsfld(typeof(EntityStates.Halcyonite.WhirlWindPersuitCycle), nameof(EntityStates.Halcyonite.WhirlWindPersuitCycle.attackInterval)))
+                    )
+                    {
+                        c.Remove();
+                        c.Emit(OpCodes.Ldarg_0);
+                        c.EmitDelegate<Func<EntityStates.Halcyonite.WhirlWindPersuitCycle, float>>((self) =>
+                        {
+                            if (escWhirlwind.TryGetFieldValueString("attackInterval", out float attackInterval))
+                            {
+                                return attackInterval / self.characterBody.attackSpeed;
+                            }
+                            else
+                            {
+                                return .25f;
+                            }
+                        });
+
+                        hookFailed = false;
+                    }
+
+                    if (hookFailed == true)
+                    {
+                        Log.Error("Halcyonite Whirlwind attack speed scaling hook failed!");
+                    }
+                };
+            }
+
+            // Whirlwind tracking
+            if (Configs.halcyoniteWhirlwindPursuit.Value == true)
+            {
+                // Whirlwind targeting
+                IL.EntityStates.Halcyonite.WhirlWindPersuitCycle.UpdateFindTarget += (il) =>
+                {
+                    ILCursor c = new(il);
+                    bool hookFailed = true;
+
+                    if (
+                        c.TryGotoNext(MoveType.Before,
+                        x => x.MatchStfld<BullseyeSearch>("sortMode"))
+                    )
+                    {
+                        c.Index--;
+                        c.Next.OpCode = OpCodes.Ldc_I4_2;
+
+                        hookFailed = false;
+                    }
+
+                    if (hookFailed == true)
+                    {
+                        Log.Error("Halcyonite Whirlwind targeting hook failed!");
+                    }
+                };
+
+                IL.EntityStates.Halcyonite.WhirlWindPersuitCycle.UpdateFindTarget += (il) =>
+                {
+                    ILCursor c = new(il);
+                    bool hookFailed = true;
+
+                    if (
+                        c.TryGotoNext(MoveType.After,
+                        x => x.MatchStfld<BullseyeSearch>("searchOrigin"))
+                    )
+                    {
+                        c.Emit(OpCodes.Ldloc_0);
+                        c.Emit(OpCodes.Ldarg_0);
+                        c.EmitDelegate<Func<EntityStates.BaseState, Vector3>>((state) =>
+                        {
+                            return state.GetAimRay().direction;
+                        });
+                        c.Emit<BullseyeSearch>(OpCodes.Stfld, nameof(BullseyeSearch.searchDirection));
+
+                        hookFailed = false;
+                    }
+
+                    if (hookFailed == true)
+                    {
+                        Log.Error("Halcyonite Whirlwind targeting (part 2) hook failed!");
+                    }
+                };
+
+                // Infinite search distance
+                escWhirlwind.TryModifyFieldValue("maxSearchDist", float.PositiveInfinity);
+
+                // Whirlwind pursuit
+                On.EntityStates.Halcyonite.WhirlWindPersuitCycle.FixedUpdate += WhirlWindPersuitCycle_FixedUpdate;
+            }
         }
 
         private bool CheckForHalcyonite(DirectorCardCategorySelection dccs)
@@ -145,6 +293,19 @@ namespace SuperCyanTweaks
             }
 
             return hasHalcyonite;
+        }
+
+        private void WhirlWindPersuitCycle_FixedUpdate(On.EntityStates.Halcyonite.WhirlWindPersuitCycle.orig_FixedUpdate orig, EntityStates.Halcyonite.WhirlWindPersuitCycle self)
+        {
+            orig(self);
+
+            if (NetworkServer.active && self.state == EntityStates.Halcyonite.WhirlWindPersuitCycle.PersuitState.Dash)
+            {
+                self.targetBody = null;
+                self.UpdateFindTarget();
+                self.targetMoveDirt = (self.targetPos - self.transform.position).normalized;
+                self.characterDirection.moveVector = self.targetMoveDirt;
+            }
         }
     }
 }

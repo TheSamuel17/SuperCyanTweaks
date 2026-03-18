@@ -24,6 +24,7 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> clayApothecaryMortarTargeting { get; private set; }
         public static ConfigEntry<bool> falseSonGolemCountTweak { get; private set; }
         public static ConfigEntry<int> geepCost { get; private set; }
+        public static ConfigEntry<bool> enemyMeleeTweak { get; private set; }
         public static ConfigEntry<int> grandparentCost { get; private set; }
         public static ConfigEntry<float> grandparentRockActivationRange { get; private set; }
         public static ConfigEntry<bool> grandparentRockDynamicSpeed { get; private set; }
@@ -31,10 +32,15 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> grandparentGravOrbForce { get; private set; }
         public static ConfigEntry<bool> grandparentGravOrbDynamicSpeed { get; private set; }
         public static ConfigEntry<bool> grandparentReduceDowntime { get; private set; }
+        public static ConfigEntry<float> greaterWispAttackRange { get; private set; }
         public static ConfigEntry<bool> gupDelayAttackOnSpawn { get; private set; }
         public static ConfigEntry<bool> halcyoniteOnMeridianPreLoop { get; private set; }
         public static ConfigEntry<bool> halcyoniteOnFalseSonLoop { get; private set; }
         public static ConfigEntry<bool> halcyoniteProperCategory { get; private set; }
+        public static ConfigEntry<int> halcyoniteCost { get; private set; }
+        public static ConfigEntry<bool> halcyoniteLaserNoPause { get; private set; }
+        public static ConfigEntry<bool> halcyoniteWhirlwindBuff { get; private set; }
+        public static ConfigEntry<bool> halcyoniteWhirlwindPursuit { get; private set; }
         public static ConfigEntry<bool> impOnHelminthRoost { get; private set; }
         public static ConfigEntry<float> lemurianFireballRange { get; private set; }
         public static ConfigEntry<int> lunarExploderCost { get; private set; }
@@ -56,6 +62,11 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> prospectorSingleHit { get; private set; }
         public static ConfigEntry<float> prospectorAttackRange { get; private set; }
         public static ConfigEntry<int> transporterCost { get; private set; }
+        public static ConfigEntry<float> titanLaserMaxRange { get; private set; }
+        public static ConfigEntry<float> titanLaserMinRange { get; private set; }
+        public static ConfigEntry<float> titanFistEndlag { get; private set; }
+        public static ConfigEntry<float> titanSummonDuration { get; private set; }
+        public static ConfigEntry<bool> voidJailerIdleFix { get; private set; }
         public static ConfigEntry<int> voidReaverCost { get; private set; }
 
         // ==================== ITEMS ==================== //
@@ -111,6 +122,12 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> moonPillarRadius { get; private set; }
         public static ConfigEntry<float> moonPillarMassDuration { get; private set; }
         public static ConfigEntry<int> moonPillarMonsterCredits { get; private set; }
+        public static ConfigEntry<float> conduitCanyonCollectiveCost { get; private set; }
+        public static ConfigEntry<bool> conduitCanyonCollectiveDebtFix { get; private set; }
+        public static ConfigEntry<bool> conduitCanyonCollectiveRewardFix { get; private set; }
+        public static ConfigEntry<int> conduitCanyonShrineCreditLeader { get; private set; }
+        public static ConfigEntry<int> conduitCanyonShrineCreditSupport { get; private set; }
+        public static ConfigEntry<float> conduitCanyonShrineCreditSupportMult { get; private set; }
         public static ConfigEntry<bool> nestSnowyShrines { get; private set; }
         public static ConfigEntry<bool> fanSpeedBoost { get; private set; }
         public static ConfigEntry<float> fanBuffDuration { get; private set; }
@@ -125,6 +142,9 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> eclipseTeamTweak { get; private set; }
         public static ConfigEntry<bool> perfectedCrippleProcCoeff { get; private set; }
         public static ConfigEntry<float> perfectedHealthMultiplier { get; private set; }
+
+        // ==================== MODS ==================== //
+        public static ConfigEntry<bool> strawPairyAITweak { get; private set; }
 
         public static void Init(ConfigFile cfg)
         {
@@ -166,6 +186,9 @@ namespace SuperCyanTweaks
             // Geep
             geepCost = cfg.Bind("Enemies - Geep", "Spawn Cost", disableByDefault.Value ? -1 : 50, "Set the director credit cost. Vanilla is 35. Set to a negative value for no change.");
 
+            // General
+            enemyMeleeTweak = cfg.Bind("Enemies - General", "Melee Attack Fix", !disableByDefault.Value, "Enemy melee attacks won't immediately trigger if interrupted during the wind-up, either from a stun or outright death.\nThis change affects Blind Vermin, Gup & Halcyonite.");
+
             // Grandparent
             grandparentCost = cfg.Bind("Enemies - Grandparent", "Spawn Cost", disableByDefault.Value ? -1 : 1000, "Set the director credit cost. Vanilla is 1150. Set to a negative value for no change.");
             grandparentRockActivationRange = cfg.Bind("Enemies - Grandparent", "Rock Throw Activation Range", disableByDefault.Value ? -1f : 1500f, "Activation range of Rock Throw. Vanilla is 300. Set to a negative value for no change.");
@@ -175,6 +198,9 @@ namespace SuperCyanTweaks
             grandparentGravOrbDynamicSpeed = cfg.Bind("Enemies - Grandparent", "Dynamic Orb Speed", !disableByDefault.Value, "Gravity Orb projectile speed scales with target distance. Vanilla is false.");
             grandparentReduceDowntime = cfg.Bind("Enemies - Grandparent", "Reduce Downtime", !disableByDefault.Value, "Grandparents will spend less time in the 'rotate to target' behaviors. Vanilla is false.");
 
+            // Greater Wisp
+            greaterWispAttackRange = cfg.Bind("Enemies - Greater Wisp", "Max Attack Range", disableByDefault.Value ? -1f : 75f, "Greater Wisps will attack from this far away. Vanilla is 50. Set to a negative value for no change.");
+
             // Gup
             gupDelayAttackOnSpawn = cfg.Bind("Enemies - Gup", "Delay Attack After Spawning", !disableByDefault.Value, "Adds a small delay between spawning and throwing out their first attack.");
 
@@ -182,6 +208,10 @@ namespace SuperCyanTweaks
             halcyoniteOnMeridianPreLoop = cfg.Bind("Enemies - Halcyonite", "Spawn on Prime Meridian (Pre-Loop)", !disableByDefault.Value, "Halcyonites appear on Prime Meridian pre-loop, as they do in other Path of the Colossus stages.");
             halcyoniteOnFalseSonLoop = cfg.Bind("Enemies - Halcyonite", "Spawn During False Son (Loop)", !disableByDefault.Value, "Halcyonites appear during False Son Phase 2 when looping.");
             halcyoniteProperCategory = cfg.Bind("Enemies - Halcyonite", "Monster Category Fix", !disableByDefault.Value, "Properly categorizes Halcyonite as a Miniboss monster on every stage where it is considered a Champion.\nWhich is pretty much everywhere except Gilded Coast & Prime Meridian.");
+            halcyoniteCost = cfg.Bind("Enemies - Halcyonite", "Spawn Cost", disableByDefault.Value ? -1 : 125, "Set the director credit cost. Vanilla is 200. Set to a negative value for no change.");
+            halcyoniteLaserNoPause = cfg.Bind("Enemies - Halcyonite", "No Pause While Lasering", !disableByDefault.Value, "Halcyonites will no longer briefly pause upon initiating their laser attack.");
+            halcyoniteWhirlwindBuff = cfg.Bind("Enemies - Halcyonite", "Whirlwind Buff", !disableByDefault.Value, "Whirlwind scales with attack speed. Whirlwind has a proc coefficient (0 -> 0.2).");
+            halcyoniteWhirlwindPursuit = cfg.Bind("Enemies - Halcyonite", "Whirlwind Pursuit Fix", !disableByDefault.Value, "Whirlwind will steadily track its target instead of calculating the target's position once at the beginning.\nWhirlwind targets are sorted by closest angle instead of closest distance.");
 
             // Imp
             impOnHelminthRoost = cfg.Bind("Enemies - Imp", "Spawn on Helminth Hatchery", !disableByDefault.Value, "Imps appear on Helminth Hatchery.");
@@ -223,6 +253,15 @@ namespace SuperCyanTweaks
 
             // Solus Transporter
             transporterCost = cfg.Bind("Enemies - Solus Transporter", "Spawn Cost", disableByDefault.Value ? -1 : 125, "Set the director credit cost. Vanilla is 200. Set to a negative value for no change.");
+
+            // Stone Titan
+            titanLaserMaxRange = cfg.Bind("Enemies - Stone Titan", "Max Laser Range", disableByDefault.Value ? -1f : 100f, "Stone Titans will fire their laser from this far away. Vanilla is 80. Set to a negative value for no change. Applies to enemy Aurelionite as well.");
+            titanLaserMinRange = cfg.Bind("Enemies - Stone Titan", "Min Laser Range", disableByDefault.Value ? -1f : 0f, "Set the minimum distance at which Stone Titans will use their laser. Vanilla is 20. Set to a negative value for no change. Applies to enemy Aurelionite as well.");
+            titanFistEndlag = cfg.Bind("Enemies - Stone Titan", "Fist Endlag", disableByDefault.Value ? -1f : 2f, "Set the duration of the fist attack's recovery animation. Vanilla is 3. Set to a negative value for no change. Applies to enemy Aurelionite as well.");
+            titanSummonDuration = cfg.Bind("Enemies - Stone Titan", "Rock Summon Duration", disableByDefault.Value ? -1f : 7f, "Set the duration of the rock summon's animation. Vanilla is 9. Set to a negative value for no change. Applies to enemy Aurelionite as well.");
+
+            // Void Jailer
+            voidJailerIdleFix = cfg.Bind("Enemies - Void Jailer", "Fix Idling", !disableByDefault.Value, "Stop Void Jailers from becoming idle upon breaking line of sight with its target.");
 
             // Void Reaver
             voidReaverCost = cfg.Bind("Enemies - Void Reaver", "Spawn Cost", disableByDefault.Value ? -1 : 250, "Set the director credit cost. Vanilla is 300. Set to a negative value for no change.");
@@ -325,6 +364,14 @@ namespace SuperCyanTweaks
             moonPillarMassDuration = cfg.Bind("Stages - Commencement", "Pillar of Mass Charge Time", disableByDefault.Value ? -1f : 45f, "Set how long it takes to charge a Pillar of Mass. Vanilla is 60. Set to a negative value for no change.");
             moonPillarMonsterCredits = cfg.Bind("Stages - Commencement", "Pillar Monster Credits", disableByDefault.Value ? -1 : 720, "Set the amount of credits each pillar can spend to spawn monsters. Vanilla is 700. Set to a negative value for no change.");
 
+            // Conduit Canyon
+            conduitCanyonCollectiveCost = cfg.Bind("Stages - Conduit Canyon", "Collective Elite (Weak) Cost Multiplier", disableByDefault.Value ? -1f : 4f, "Set the director cost multiplier of weak Collective Elites. Vanilla is 2. Set to a negative value for no change.");
+            conduitCanyonCollectiveDebtFix = cfg.Bind("Stages - Conduit Canyon", "Collective Elite (Weak) Debt Fix", !disableByDefault.Value, "The director will make sure it can afford to upgrade a monster to a weak Collective, instead of ignoring that and going into debt. Vanilla is false.\nIf set to true, I recommend setting the cost multiplier below x6 or whatever multiplier T1 Elites are set to; otherwise, the game will prioritize regular Elite spawns over Collective ones.");
+            conduitCanyonCollectiveRewardFix = cfg.Bind("Stages - Conduit Canyon", "Collective Elite (Weak) Reward Fix", !disableByDefault.Value, "Monsters upgraded to weak Collective will appropriately drop more gold & experience instead of the exact same amount as a regular monster.");
+            conduitCanyonShrineCreditLeader = cfg.Bind("Stages - Conduit Canyon", "Collective Combat Shrine Leader Credits", disableByDefault.Value ? -1 : 100, "Set the base amount of monster credits used to summon the leader, who is always a weak Collective Elite. Vanilla is 120. Set to a negative value for no change.\nFor reference, regular Combat Shrines hold 100.");
+            conduitCanyonShrineCreditSupport = cfg.Bind("Stages - Conduit Canyon", "Collective Combat Shrine Support Credits", disableByDefault.Value ? -1 : 0, "Set the base amount of monster credits used to summon the supporting monsters. Vanilla is 70. Set to a negative value for no change.\nUpon spawning the leader, all leftover credits are sent to the supporting monsters. Thus, the shrine can spawn supporting monsters even if the value is set to 0.");
+            conduitCanyonShrineCreditSupportMult = cfg.Bind("Stages - Conduit Canyon", "Collective Combat Shrine Support Credit Multiplier", disableByDefault.Value ? -1f : 1f, "The final amount of supporting monster credits are multiplied by this amount. Vanilla is .5. Set to a negative value for no change.");
+
             // Pretender's Precipice
             nestSnowyShrines = cfg.Bind("Stages - Pretender’s Precipice", "Snowy Shrines", !disableByDefault.Value, "Shrines will spawn as their snowy variants on this stage.");
 
@@ -348,6 +395,11 @@ namespace SuperCyanTweaks
             // Perfected Elite
             perfectedCrippleProcCoeff = cfg.Bind("Miscellaneous - Perfected Elite", "Cripple Proc Coefficient", !disableByDefault.Value, "Cripple duration scales with the hit's proc coefficient.");
             perfectedHealthMultiplier = cfg.Bind("Miscellaneous - Perfected Elite", "Base Health Multiplier", disableByDefault.Value ? -1f : 2.4f, "Set the base health multiplier for Perfected Elites. Vanilla is 2. Set to a negative value for no change.\nKeep in mind that this value will be multiplied by x1.25 due to the Aspect's effect.");
+
+            // ==================== MODS ==================== //
+
+            // SeekingTheVoid
+            strawPairyAITweak = cfg.Bind("Mods - SeekingTheVoid", "Straw’Pair’y AI Tweaks", !disableByDefault.Value, "Stops Gup from idling when locking onto a flying target. Instead, it'll prioritize (but not exclusively target!) grounded enemies.\nIt'll also initiate the attack from a shorter distance to reduce the amount of 'just out of reach' moments.");
         }
     }
 }

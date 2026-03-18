@@ -1,3 +1,33 @@
+## 1.0.8
+
+- Fixed some enemies' melee attacks immediately triggering if interrupted or killed during the wind-up. This change affects Blind Vermin, Gup (including descendants) and Halcyonite.
+    - As a side effect, this means they might refuse to go off at very *very* high attack speed values. Big whoop.
+- Fixed Void Jailer becoming idle upon breaking line of sight with its target.
+- Greater Wisp: increased attack range. (50m -> 75m)
+- Stone Titan / Aurelionite
+    - Removed minimum distance requirement to use the laser. (20m -> 0m)
+    - Max laser range increased. (80m -> 100m)
+    - Fist endlag decreased. (3s -> 2s)
+    - Rock summon duration decreased. (9s -> 7s)
+- Halcyonite
+    - Credit cost decreased. (200 -> 125)
+    - Removed that weird little pause they do upon starting their laser attack.
+    - Whirlwind tickrate now scales with attack speed.
+    - Whirlwind now has a small proc coefficient. (0 -> 0.2)
+    - Whirlwind now steadily tracks its target instead of calculating the target's position once at the beginning.
+- Made Conduit Canyon less fucking evil. My god.
+    - Adjusted cost multiplier of weak Collective Elites. (x2 -> x4)
+        - Wait, x2?????
+        - Also included compatibility with [EclipseRevamped](https://thunderstore.io/package/Nuxlar/EclipseRevamped/)'s E3 modifier; the cost multiplier will be appropriately reduced by 20%.
+    - The Elite promoting algorithm will now make sure it has enough credits to afford the upgrade, instead of... ignoring that and going into debt. What do you mean, *going into debt?*
+    - Enemies promoted to weak Collective now have their gold reward increased accordingly.
+    - Base monster credits for Collective Combat Shrines reduced. (120 leader / 70 support -> 100/0)
+        - For reference, regular Combat Shrines hold 100.
+        - After spawning the "leader", all leftover monster credits are automatically transferred to the supporting monsters. Thus, the supporting monsters will almost always spawn even if the base value is set to 0.
+    - Collective Combat Shrine monster credits are no longer halved upon spawning the supporting monsters.
+- Stage 4 Shrine of Order: added compatibility for [Sunset Tropics/Midnight Tropics](https://thunderstore.io/package/wormsworms/Sunset_Tropics/).
+- [Straw'Pair'y](https://thunderstore.io/package/acanthic/SeekingTheVoid/): worked some black magic to make Gup a little Smarter.
+
 ## 1.0.7
 
 - Updated Chinese translation, courtesy of JunJun5406 (Growth Nectar was missing).

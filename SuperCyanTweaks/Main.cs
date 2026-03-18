@@ -12,9 +12,10 @@ namespace SuperCyanTweaks
 
     // Soft dependencies
     [BepInDependency("Jeffdev.FalseSonBossTweaks", BepInDependency.DependencyFlags.SoftDependency)] // Phase 2 enemy tweaks of this mod can't be conventionally turned off, so I have to forcibly acquire priority
+    [BepInDependency("Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
 
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.7")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.8")]
 
     public class Main : BaseUnityPlugin
     {
@@ -37,7 +38,9 @@ namespace SuperCyanTweaks
             new ClayApothecary();
             new FalseSon();
             new Geep();
+            new GeneralEnemies();
             new Grandparent();
+            new GreaterWisp();
             new Gup();
             new Halcyonite();
             new Imp();
@@ -50,6 +53,8 @@ namespace SuperCyanTweaks
             new SolusProbe();
             new SolusProspector();
             new SolusTransporter();
+            new StoneTitan();
+            new VoidJailer();
             new VoidReaver();
 
             // Changes - Items
@@ -83,6 +88,7 @@ namespace SuperCyanTweaks
 
             // Changes - Stages
             new Commencement();
+            new ConduitCanyon();
             new PretendersPrecipice();
             new RallypointDelta();
 
@@ -92,6 +98,9 @@ namespace SuperCyanTweaks
             // Changes - Miscellaneous
             new Eclipse();
             new PerfectedElite();
+
+            // Changes - Mods
+            new StrawPairy();
         }
     }
 }

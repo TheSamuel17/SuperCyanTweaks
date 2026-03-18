@@ -51,10 +51,8 @@ namespace SuperCyanTweaks
 
         private void OnStageStartGlobal(Stage stage)
         {
-            if (SceneInfo.instance.sceneDef != SceneCatalog.FindSceneDef("frozenwall"))
-            {
-                return;
-            }
+            if (!SceneInfo.instance) return;
+            if (SceneInfo.instance.sceneDef != SceneCatalog.FindSceneDef("frozenwall")) return;
 
             GameObject fanHolder = GameObject.Find("/PERMUTATION: Human Fan/");
             if (fanHolder)
