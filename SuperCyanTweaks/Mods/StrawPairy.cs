@@ -111,7 +111,7 @@ namespace SuperCyanTweaks
 
         private void FixedUpdate()
         {
-            if (ai)
+            if (ai && ai.customTarget != null)
             {
                 if (ai.customTarget.gameObject != null)
                 {
@@ -132,7 +132,9 @@ namespace SuperCyanTweaks
             for (int i = 0; i < 2; i++)
             {
                 if (!ai) return;
+                if (!ai.body) return;
                 if (!ai.bodyInputBank) return;
+                if (ai.customTarget == null) return;
                 if (i == 1 && ai.customTarget.gameObject != null) return;
 
                 Ray aimRay = ai.bodyInputBank.GetAimRay();
@@ -178,7 +180,12 @@ namespace SuperCyanTweaks
         private bool TargetPassesFilters(HurtBox arg)
         {
             // Filter out flying targets farther than Gup's attack range
-            return (!arg.healthComponent.body.isFlying || (arg.transform.position - enemySearch.searchOrigin).sqrMagnitude <= StrawPairy.sqrAttackDistance);
+            if (arg.healthComponent && arg.healthComponent.body)
+            {
+                return (!arg.healthComponent.body.isFlying || (arg.transform.position - enemySearch.searchOrigin).sqrMagnitude <= StrawPairy.sqrAttackDistance);
+            }
+
+            return false;
         }
     }
 }

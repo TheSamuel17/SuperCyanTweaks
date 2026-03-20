@@ -15,7 +15,7 @@ namespace SuperCyanTweaks
     [BepInDependency("Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
 
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.9")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.91")]
 
     public class Main : BaseUnityPlugin
     {

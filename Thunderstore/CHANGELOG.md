@@ -1,3 +1,7 @@
+## 1.0.91
+
+- DIE NULLREFERENCEEXCEPTION DIE
+
 ## 1.0.9
 
 - [Straw'Pair'y](https://thunderstore.io/package/acanthic/SeekingTheVoid/)
