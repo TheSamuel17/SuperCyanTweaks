@@ -13,12 +13,26 @@ namespace SuperCyanTweaks
         
         public StrawPairy()
         {
+            // AI tweaks
             if (Configs.strawPairyAITweak.Value == true)
             {
                 RoR2Application.onLoad += () =>
                 {
                     RegisterModifiedGup();
                 };
+            }
+
+            // FoodRelated tag
+            if (Configs.strawPairyIsFood.Value == true)
+            {
+                ItemCatalog.availability.CallWhenAvailable(delegate()
+                {
+                    ItemDef strawPairy = ItemCatalog.GetItemDef(ItemCatalog.FindItemIndex("SEEKINTHEVOID_STRAWPAIRY_NAME"));
+                    if (strawPairy)
+                    {
+                        strawPairy.tags = strawPairy.tags.AddToArray(ItemTag.FoodRelated);
+                    }
+                });
             }
         }
 
@@ -97,15 +111,18 @@ namespace SuperCyanTweaks
 
         private void FixedUpdate()
         {
-            if (ai.customTarget.gameObject != null)
+            if (ai)
             {
-                ai.customTarget.lastKnownBullseyePosition = ai.GetBestHurtBox(ai.customTarget.gameObject).transform.position;
-                ai.customTarget.lastKnownBullseyePositionTime = Run.FixedTimeStamp.now;
-            }
-            else
-            {
-                ai.customTarget.lastKnownBullseyePosition = null;
-                ai.customTarget.lastKnownBullseyePositionTime = Run.FixedTimeStamp.negativeInfinity;
+                if (ai.customTarget.gameObject != null)
+                {
+                    ai.customTarget.lastKnownBullseyePosition = ai.GetBestHurtBox(ai.customTarget.gameObject).transform.position;
+                    ai.customTarget.lastKnownBullseyePositionTime = Run.FixedTimeStamp.now;
+                }
+                else
+                {
+                    ai.customTarget.lastKnownBullseyePosition = null;
+                    ai.customTarget.lastKnownBullseyePositionTime = Run.FixedTimeStamp.negativeInfinity;
+                }
             }
             
             timer += Time.fixedDeltaTime;
@@ -115,6 +132,7 @@ namespace SuperCyanTweaks
             for (int i = 0; i < 2; i++)
             {
                 if (!ai) return;
+                if (!ai.bodyInputBank) return;
                 if (i == 1 && ai.customTarget.gameObject != null) return;
 
                 Ray aimRay = ai.bodyInputBank.GetAimRay();

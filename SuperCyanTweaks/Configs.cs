@@ -114,6 +114,7 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> accessNodeMultiplyRewards { get; private set; }
         public static ConfigEntry<int> droneScrapperMaxCount { get; private set; }
         public static ConfigEntry<bool> droneScrapperOnHabitat { get; private set; }
+        public static ConfigEntry<bool> droneScrapperFaster { get; private set; }
         public static ConfigEntry<bool> shrineOfOrderOnStage4 { get; private set; }
 
         // ==================== STAGES ==================== //
@@ -145,6 +146,7 @@ namespace SuperCyanTweaks
 
         // ==================== MODS ==================== //
         public static ConfigEntry<bool> strawPairyAITweak { get; private set; }
+        public static ConfigEntry<bool> strawPairyIsFood { get; private set; }
 
         public static void Init(ConfigFile cfg)
         {
@@ -351,6 +353,7 @@ namespace SuperCyanTweaks
             // Drone Scrapper
             droneScrapperMaxCount = cfg.Bind("Interactables - Drone Scrapper", "Max Count", disableByDefault.Value ? -1 : 1, "Set the maximum amount of times it can spawn per stage. Vanilla is -1. Set to negative for no limit.");
             droneScrapperOnHabitat = cfg.Bind("Interactables - Drone Scrapper", "Spawn on Treeborn Colony", !disableByDefault.Value, "Drone Scrappers appear on Treeborn Colony & Golden Dieback.");
+            droneScrapperFaster = cfg.Bind("Interactables - Drone Scrapper", "Faster Animation", !disableByDefault.Value, "Drone Scrappers are faster.");
 
             // Shrine of Order
             shrineOfOrderOnStage4 = cfg.Bind("Interactables - Shrine of Order", "Spawn on Stage 4", !disableByDefault.Value, "A Shrine of Order will spawn in a fixed location on every Stage 4.");
@@ -400,6 +403,7 @@ namespace SuperCyanTweaks
 
             // SeekingTheVoid
             strawPairyAITweak = cfg.Bind("Mods - SeekingTheVoid", "Straw’Pair’y AI Tweaks", !disableByDefault.Value, "Stops Gup from idling when locking onto a flying target. Instead, it'll prioritize (but not exclusively target!) grounded enemies.\nIt'll also initiate the attack from a shorter distance to reduce the amount of 'just out of reach' moments.");
+            strawPairyIsFood = cfg.Bind("Mods - SeekingTheVoid", "Straw’Pair’y Is Food", !disableByDefault.Value, "Tags the item as 'FoodRelated', which makes it eligible for the Hearty Stew recipe.");
         }
     }
 }

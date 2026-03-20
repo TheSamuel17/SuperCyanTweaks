@@ -1,3 +1,10 @@
+## 1.0.9
+
+- [Straw'Pair'y](https://thunderstore.io/package/acanthic/SeekingTheVoid/)
+    - Nullref hunting. Shoutouts Snowy Snowtime.
+    - Tagged the item as FoodRelated so it may be used for the Hearty Stew recipe.
+- Drone Scrapper: shortened its animation.
+
 ## 1.0.8
 
 - Fixed some enemies' melee attacks immediately triggering if interrupted or killed during the wind-up. This change affects Blind Vermin, Gup (including descendants) and Halcyonite.
