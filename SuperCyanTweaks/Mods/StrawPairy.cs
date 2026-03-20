@@ -115,8 +115,17 @@ namespace SuperCyanTweaks
             {
                 if (ai.customTarget.gameObject != null)
                 {
-                    ai.customTarget.lastKnownBullseyePosition = ai.GetBestHurtBox(ai.customTarget.gameObject).transform.position;
-                    ai.customTarget.lastKnownBullseyePositionTime = Run.FixedTimeStamp.now;
+                    HurtBox bestHurtBox = ai.GetBestHurtBox(ai.customTarget.gameObject);
+                    if (bestHurtBox)
+                    {
+                        ai.customTarget.lastKnownBullseyePosition = ai.GetBestHurtBox(ai.customTarget.gameObject).transform.position;
+                        ai.customTarget.lastKnownBullseyePositionTime = Run.FixedTimeStamp.now;
+                    }
+                    else
+                    {
+                        ai.customTarget.lastKnownBullseyePosition = null;
+                        ai.customTarget.lastKnownBullseyePositionTime = Run.FixedTimeStamp.negativeInfinity;
+                    }
                 }
                 else
                 {
