@@ -15,7 +15,7 @@ namespace SuperCyanTweaks
     [BepInDependency("Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
 
     // Metadata
-    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.0.92")]
+    [BepInPlugin("Samuel17.SuperCyanTweaks", "SuperCyanTweaks", "1.1.0")]
 
     public class Main : BaseUnityPlugin
     {
@@ -48,6 +48,8 @@ namespace SuperCyanTweaks
             new LunarExploder();
             new LunarWisp();
             new MiniMushrum();
+            new Mithrix();
+            new ScorchWorm();
             new SolusControlUnit();
             new SolusDistributor();
             new SolusProbe();
@@ -60,13 +62,16 @@ namespace SuperCyanTweaks
             // Changes - Items
             new EclipseLite();
             new EmpathyCores();
+            new FaradaySpur();
             new FrostRelic();
             new GenesisLoop();
             new GrowthNectar();
             new HalcyonSeed();
             new HappiestMask();
+            new HuntersHarpoon();
             new OldWarStealthkit();
             new OrphanedCore();
+            new ResonanceDisc();
             new SonorousWhispers();
             new WakeOfVultures();
             new WarBonds();
@@ -101,6 +106,7 @@ namespace SuperCyanTweaks
 
             // Changes - Mods
             new StrawPairy();
+            new Xenobacteria();
         }
     }
 }

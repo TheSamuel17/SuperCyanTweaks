@@ -1,3 +1,24 @@
+## 1.1.0
+
+- Void Jailer pathfinding fix should now affect friendly ones as well.
+- Solus Probe aim/turning speed increased. (60 -> 120)
+- Mithrix will steal items significantly faster. (0.2s interval -> 0.08s)
+- Resonance Disc
+    - Will no longer target neutral bodies. This includes things like pots, Newt and the explosive barrels on Rallypoint Delta.
+    - Removed the brief (0.5s) state where the disc locks its aim before launching itself, shaving off half a second of downtime and significantly improving its accuracy as a result.
+- Solus Transporter
+    - Will no longer target neutral bodies.
+    - Will periodically re-target instead of laser-focusing one thing until it dies.
+- Faraday Spur
+    - Maximum speed bonus reduced. (160% -> 100%)
+    - Time required for full charge is reduced by 37.5%, effectively keeping the speed gain rate identical to before.
+    - Fixed charge rate being slower at sub-60 FPS. (Now uses fixedDeltaTime instead of deltaTime.)
+    - Upon triggering a charged jump, gain fall damage resistance equal to what you would've received with that jump height. Lasts until you land.
+- Scorch Worm breach damage coefficient decreased. (300% -> 150%)
+- [Xenobacteria](https://thunderstore.io/package/hex3/Nautilus/) - Added an option to retier it to Void Uncommon, in case you like playing with GreenAlienHead like I do. Disabled by deafult.
+- Hunter's Harpoon: buff duration doubled from 1s (+0.5s per stack) to 2s (+1s per stack).
+- Stage 4 Shrine of Order: added compatibility for [Sunken Tombs](https://thunderstore.io/package/wormsworms/Sunken_Tombs_Returns/).
+
 ## 1.0.92
 
 - DIE NULLREFERENCEEXCEPTION DIE

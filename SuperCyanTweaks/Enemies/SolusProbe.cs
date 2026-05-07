@@ -10,6 +10,8 @@ namespace SuperCyanTweaks
     {
         public static CharacterSpawnCard cscProbe = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/RoboBallBoss/cscRoboBallMini.asset").WaitForCompletion();
         public static GameObject probeMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/RoboBallMiniMaster.prefab").WaitForCompletion();
+        public static GameObject probeRedBuddyMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBuddy/RoboBallRedBuddyMaster.prefab").WaitForCompletion();
+        public static GameObject probeGreenBuddyMasterPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBuddy/RoboBallGreenBuddyMaster.prefab").WaitForCompletion();
         public static FamilyDirectorCardCategorySelection solusFamily = Addressables.LoadAssetAsync<FamilyDirectorCardCategorySelection>("RoR2/DLC3/dccsSuperRoboBallpitFamily.asset").WaitForCompletion();
 
         public SolusProbe()
@@ -112,6 +114,14 @@ namespace SuperCyanTweaks
                 strafeOnSpawn.skillSlot = SkillSlot.None;
 
                 probeMasterPrefab.ReorderSkillDrivers(strafeOnSpawn, 0);
+            }
+
+            // Aim speed
+            if (Configs.probeAimSpeed.Value >= 0)
+            {
+                probeMasterPrefab.GetComponent<BaseAI>().aimVectorMaxSpeed = Configs.probeAimSpeed.Value;
+                probeRedBuddyMasterPrefab.GetComponent<BaseAI>().aimVectorMaxSpeed = Configs.probeAimSpeed.Value;
+                probeGreenBuddyMasterPrefab.GetComponent<BaseAI>().aimVectorMaxSpeed = Configs.probeAimSpeed.Value;
             }
         }
     }

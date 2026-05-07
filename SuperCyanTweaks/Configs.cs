@@ -49,6 +49,8 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> mushrumSprintDist { get; private set; }
         public static ConfigEntry<float> mushrumSprintCoeff { get; private set; }
         public static ConfigEntry<bool> mushrumOnHabitatFall { get; private set; }
+        public static ConfigEntry<float> mithrixStealInterval { get; private set; }
+        public static ConfigEntry<float> scorchWormBreachDmg { get; private set; }
         public static ConfigEntry<bool> scuRespectNodegraph { get; private set; }
         public static ConfigEntry<float> scuPrimaryAttackRange { get; private set; }
         public static ConfigEntry<float> scuProbeHealthThreshold { get; private set; }
@@ -59,9 +61,11 @@ namespace SuperCyanTweaks
         public static ConfigEntry<bool> probeOnRepurposedCrater { get; private set; }
         public static ConfigEntry<bool> probeOnSolusEvent { get; private set; }
         public static ConfigEntry<bool> probeDelayAttackOnSpawn { get; private set; }
+        public static ConfigEntry<float> probeAimSpeed { get; private set; }
         public static ConfigEntry<bool> prospectorSingleHit { get; private set; }
         public static ConfigEntry<float> prospectorAttackRange { get; private set; }
         public static ConfigEntry<int> transporterCost { get; private set; }
+        public static ConfigEntry<bool> transporterTargetingFix { get; private set; }
         public static ConfigEntry<float> titanLaserMaxRange { get; private set; }
         public static ConfigEntry<float> titanLaserMinRange { get; private set; }
         public static ConfigEntry<float> titanFistEndlag { get; private set; }
@@ -74,6 +78,10 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> eclipseLiteBarrierStack { get; private set; }
         public static ConfigEntry<bool> eclipseLiteCountShields { get; private set; }
         public static ConfigEntry<bool> empathyCoresDamageTweak { get; private set; }
+        public static ConfigEntry<float> faradaySpurMaxSpeed { get; private set; }
+        public static ConfigEntry<float> faradaySpurChargeRate { get; private set; }
+        public static ConfigEntry<bool> faradaySpurChargeFix { get; private set; }
+        public static ConfigEntry<bool> faradaySpurAntiCrater { get; private set; }
         public static ConfigEntry<bool> frostRelicCrit { get; private set; }
         public static ConfigEntry<float> genesisLoopProcCoeff { get; private set; }
         public static ConfigEntry<bool> genesisLoopLosTweak { get; private set; }
@@ -83,10 +91,14 @@ namespace SuperCyanTweaks
         public static ConfigEntry<float> allyAurelioniteTauntDuration { get; private set; }
         public static ConfigEntry<float> allyAurelioniteMinLaserRange { get; private set; }
         public static ConfigEntry<float> happiestMaskProcChance { get; private set; }
+        public static ConfigEntry<float> harpoonDurationBase { get; private set; }
+        public static ConfigEntry<float> harpoonDurationStack { get; private set; }
         public static ConfigEntry<float> stealthKitThreshold { get; private set; }
         public static ConfigEntry<float> bestBuddyRamDamage { get; private set; }
         public static ConfigEntry<bool> bestBuddyBehaviorTweak { get; private set; }
         public static ConfigEntry<bool> bestBuddyHitDetection { get; private set; }
+        public static ConfigEntry<bool> resonanceDiscTargeting { get; private set; }
+        public static ConfigEntry<bool> resonanceDiscAccuracy { get; private set; }
         public static ConfigEntry<bool> sonorousWhispersRework { get; private set; }
         public static ConfigEntry<float> wakeOfVulturesDurationBase { get; private set; }
         public static ConfigEntry<float> wakeOfVulturesDurationStack { get; private set; }
@@ -147,6 +159,7 @@ namespace SuperCyanTweaks
         // ==================== MODS ==================== //
         public static ConfigEntry<bool> strawPairyAITweak { get; private set; }
         public static ConfigEntry<bool> strawPairyIsFood { get; private set; }
+        public static ConfigEntry<bool> xenobacteriaRetier { get; private set; }
 
         public static void Init(ConfigFile cfg)
         {
@@ -233,6 +246,12 @@ namespace SuperCyanTweaks
             mushrumSprintCoeff = cfg.Bind("Enemies - Mini Mushrum", "Sprint Coefficient", disableByDefault.Value ? -1f : 3f, "Set the sprint speed multiplier to this value. Vanilla is 2.5. Set to a negative value for no change.");
             mushrumOnHabitatFall = cfg.Bind("Enemies - Mini Mushrum", "Spawn on Golden Dieback", !disableByDefault.Value, "Mini Mushrums appear on Golden Dieback.");
 
+            // Mithrix
+            mithrixStealInterval = cfg.Bind("Enemies - Mithrix", "Item Steal Interval", disableByDefault.Value ? -1f : .08f, "Set the time interval between stealing items. Vanilla is 0.2. Set to a negative value for no change.");
+
+            // Scorch Worm
+            scorchWormBreachDmg = cfg.Bind("Enemies - Scorch Worm", "Breach Damage Coefficient", disableByDefault.Value ? -1f : 1.5f, "Set the damage coefficient to this value. Vanilla is 3. Set to a negative value for no change.");
+
             // Solus Control Unit
             scuRespectNodegraph = cfg.Bind("Enemies - Solus Control Unit", "Respect Nodegraph", !disableByDefault.Value, "Solus Control Units will properly follow the nodegraph while chasing. Applies to AWU as well.");
             scuPrimaryAttackRange = cfg.Bind("Enemies - Solus Control Unit", "Max Primary Attack Range", disableByDefault.Value ? -1f : 100f, "Solus Control Units will attack from this far away. Vanilla is 50. Set to a negative value for no change. Applies to AWU as well.");
@@ -248,6 +267,7 @@ namespace SuperCyanTweaks
             probeOnRepurposedCrater = cfg.Bind("Enemies - Solus Probe", "Spawn on Repurposed Crater", !disableByDefault.Value, "Solus Probes appear on Repurposed Crater.");
             probeOnSolusEvent = cfg.Bind("Enemies - Solus Probe", "Add to Solus Family Event", !disableByDefault.Value, "Solus Probes appear during the Solus Family Event.");
             probeDelayAttackOnSpawn = cfg.Bind("Enemies - Solus Probe", "Delay Attack After Spawning", !disableByDefault.Value, "Adds a small delay between spawning and throwing out their first attack.");
+            probeAimSpeed = cfg.Bind("Enemies - Solus Probe", "Aim Speed", disableByDefault.Value ? -1f : 120f, "Set the aiming/turning speed. Vanilla is 60. Set to a negative value for no change.");
 
             // Solus Prospector
             prospectorSingleHit = cfg.Bind("Enemies - Solus Prospector", "Single Hit", !disableByDefault.Value, "Prevents them from hitting you multiple times per attack.");
@@ -255,6 +275,7 @@ namespace SuperCyanTweaks
 
             // Solus Transporter
             transporterCost = cfg.Bind("Enemies - Solus Transporter", "Spawn Cost", disableByDefault.Value ? -1 : 125, "Set the director credit cost. Vanilla is 200. Set to a negative value for no change.");
+            transporterTargetingFix = cfg.Bind("Enemies - Solus Transporter", "Targeting Fix", !disableByDefault.Value, "Prevents them from targeting neutral bodies, such as pots and the explosive barrels on Rallypoint Delta.\nAlso allows them to periodically re-target, instead of being permanently stuck on the same target until it dies.");
 
             // Stone Titan
             titanLaserMaxRange = cfg.Bind("Enemies - Stone Titan", "Max Laser Range", disableByDefault.Value ? -1f : 100f, "Stone Titans will fire their laser from this far away. Vanilla is 80. Set to a negative value for no change. Applies to enemy Aurelionite as well.");
@@ -278,6 +299,12 @@ namespace SuperCyanTweaks
             // Empathy Cores
             empathyCoresDamageTweak = cfg.Bind("Items - Empathy Cores", "Empathy Cores Damage Tweak", !disableByDefault.Value, "Empathy Cores damage boost affects skill damage instead of base damage.\nThis nerfs synergies that depend on base damage, notably the chainguns from Spare Drone Parts.");
 
+            // Faraday Spur
+            faradaySpurMaxSpeed = cfg.Bind("Items - Faraday Spur", "Maximum Speed Bonus", disableByDefault.Value ? -1f : 100f, "Set the max speed bonus percentage. Vanilla is 160. Set to a negative value for no change.");
+            faradaySpurChargeRate = cfg.Bind("Items - Faraday Spur", "Charge Rate Multiplier", disableByDefault.Value ? -1f : 1.6f, "Set how much faster this item charges up relative to vanilla. Vanilla is 1. Set to a negative value for no change.");
+            faradaySpurChargeFix = cfg.Bind("Items - Faraday Spur", "Charge Rate Fix", !disableByDefault.Value, "Charge rate is no longer slower at sub-60 FPS. Vanilla is false.");
+            faradaySpurAntiCrater = cfg.Bind("Items - Faraday Spur", "Fall Damage Resistance", !disableByDefault.Value, "Upon triggering a charged jump, gain fall damage resistance equal to what you would've received with that jump height. Vanilla is false.");
+
             // Frost Relic
             frostRelicCrit = cfg.Bind("Items - Frost Relic", "Frost Relic Crit", !disableByDefault.Value, "Allow the Frost Relic to crit. Vanilla is false.");
 
@@ -297,6 +324,10 @@ namespace SuperCyanTweaks
             // Happiest Mask
             happiestMaskProcChance = cfg.Bind("Items - Happiest Mask", "Proc Chance", disableByDefault.Value ? -1f : 10f, "Set the proc chance of this item, in percentage. Vanilla is 7%. Set to a negative value for no change.");
 
+            // Hunter's Harpoon
+            harpoonDurationBase = cfg.Bind("Items - Hunter’s Harpoon", "Base Duration", disableByDefault.Value ? -1f : 2f, "Set the duration of the decaying speed boost, in seconds. Vanilla is 1. Set to a negative value for no change.");
+            harpoonDurationStack = cfg.Bind("Items - Hunter’s Harpoon", "Stack Duration", disableByDefault.Value ? -1f : 1f, "Set the duration of the decaying speed boost, in seconds. Vanilla is 0.5. Set to a negative value for no change.");
+
             // Old War Stealthkit
             stealthKitThreshold = cfg.Bind("Items - Old War Stealthkit", "Activation Threshold", disableByDefault.Value ? -1f : .5f, "This item will activate under this health fraction. Vanilla is 0.25. Set to a negative value for no change.");
 
@@ -304,6 +335,10 @@ namespace SuperCyanTweaks
             bestBuddyRamDamage = cfg.Bind("Items - Orphaned Core", "Ram Damage", disableByDefault.Value ? -1f : 6f, "Set the damage coefficient to this value. The value is multiplied by x2.5 against heavy targets. Vanilla is 4. Set to a negative value for no change.");
             bestBuddyBehaviorTweak = cfg.Bind("Items - Orphaned Core", "Tweak Behavior", !disableByDefault.Value, "Adjusts the AI of Best Buddy to be more competent. Vanilla is false.");
             bestBuddyHitDetection = cfg.Bind("Items - Orphaned Core", "Improve Hit Detection", !disableByDefault.Value, "Improves the re-hit rate and makes the kinetic aura hitbox roughly match the visuals. Vanilla is false.");
+
+            // Resonance Disc
+            resonanceDiscTargeting = cfg.Bind("Items - Resonance Disc", "Targeting Fix", !disableByDefault.Value, "Prevents the disc from targeting neutral bodies, such as pots and the explosive barrels on Rallypoint Delta.");
+            resonanceDiscAccuracy = cfg.Bind("Items - Resonance Disc", "Improved Accuracy", !disableByDefault.Value, "Removes the brief (0.5s) state where the disc locks its aim before launching itself.\nIs combined with a boost to its tracking speed, allowing it to practically never miss.");
 
             // Sonorous Whispers
             sonorousWhispersRework = cfg.Bind("Items - Sonorous Whispers", "Sonorous Whispers Rework", !disableByDefault.Value, "Items only drop from bosses proper instead of Champions, and will no longer drop from elites.\nStacking improves item rarity.\nEffect is now team-wide.");
@@ -404,6 +439,9 @@ namespace SuperCyanTweaks
             // SeekingTheVoid
             strawPairyAITweak = cfg.Bind("Mods - SeekingTheVoid", "Straw’Pair’y AI Tweaks", !disableByDefault.Value, "Stops Gup from idling when locking onto a flying target. Instead, it'll prioritize (but not exclusively target!) grounded enemies.\nIt'll also initiate the attack from a shorter distance to reduce the amount of 'just out of reach' moments.");
             strawPairyIsFood = cfg.Bind("Mods - SeekingTheVoid", "Straw’Pair’y Is Food", !disableByDefault.Value, "Tags the item as 'FoodRelated', which makes it eligible for the Hearty Stew recipe.");
+
+            // Nautilus
+            xenobacteriaRetier = cfg.Bind("Mods - Nautilus", "Xenobacteria Retiering", false, "Xenobacteria is re-tiered to a Void Uncommon. Enable if you're playing with GreenAlienHead.");
         }
     }
 }

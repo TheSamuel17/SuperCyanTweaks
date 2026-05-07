@@ -75,6 +75,12 @@ namespace SuperCyanTweaks
                     rotation = new Vector3(355f, 180f, 0f);
                     break;
 
+                case "sunkentombs_wormsworms":
+                    prefab = shrineRestackPrefab;
+                    position = new Vector3(-137.5f, 84.2f, -213f);
+                    rotation = new Vector3(5f, 330f, 0f);
+                    break;
+
                 default:
                     break;
             }
